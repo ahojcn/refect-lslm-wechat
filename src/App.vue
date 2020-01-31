@@ -1,74 +1,56 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <br>
-    {{status}} | {{data}}
-    <br>
-    <span style="color: red">
-      cookie[{{cookie}}]
-    </span>
-    <br>
-    <span style="color: coral">
-      openId[{{openId}}]
-    </span>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+  import {getUserInfo} from '@/api/basic-info';
+
   export default {
     name: 'App',
     data() {
-      return {
-        data: {},
-        status: '...',
-        cookie: 'xxx',
-        openId: 'xxx',
-      }
+      return {}
     },
     mounted() {
-      // this.$axios.get('wechat/authorize', {
-      //   params: {
-      //     returnUrl: 'http://127.0.0.1:8080/'
-      //   }
-      // }).then(res => {
-      //   this.status = 'success';
-      //   this.data = res;
-      // }).catch(err=>{
-      //   this.status = 'error';
-      //   this.data = err;
-      // });
+      getUserInfo({openId: this.$route.query["openId"]}).then(res => {
+        res = res.data;
+        let state = this.$store.state;
+        state.userInfo = res.userInfo;
+        state.clubInfo = res.clubInfo;
+        state.companyInfo = res.companyInfo;
+        state.studentInfo = res.studentInfo;
 
-      // this.cookie = this.$cookie.get('openid');
+        // 判断是否是新用户
+        if (Object.keys(res.clubInfo).length === 0
+          || Object.keys(res.companyInfo).length === 0
+          || Object.keys(res.studentInfo).length === 0) {
+          state.isNewUser = true;
+          this.$router.push({
+            path: '/NewUserIndex',
+            query: {
+              openId: this.$route.query["openId"]
+            }
+          });
+        }
 
-      // this.cookie = this.$route.query["openId"];
-      //
-      // localStorage.setItem('openId', this.cookie);
-      //
-      // this.openId = localStorage.getItem('openId');
-      //
-      // this.$axios.post(
-      //   'basic-info/getUserInfo',
-      //   JSON.stringify({openId: 'oxrwq0zPbgTB-gV9Y4Q-hN4g25Fk'}),
-      //   {headers: {'Content-Type': 'application/json'}},
-      // ).then(res => {
-      //   this.status = 'success';
-      //   this.data = res;
-      // }).catch(err => {
-      //   this.status = 'error';
-      //   this.data = err;
-      // });
-
-    }
+      });
+    },
+    created() {
+    },
   }
 </script>
 
 <style>
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+    background: #f1f1fe;
+    position: relative;
+    border-radius: 10px;
+    overflow: scroll;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 </style>

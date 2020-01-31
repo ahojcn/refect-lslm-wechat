@@ -3,21 +3,16 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-
-// import axios from 'axios';
-// import VueAxios from 'vue-axios';
+import store from './store';
 
 import VueCookie from 'vue-cookie';
-
+import Animated from 'animate.css';
 import Vant from 'vant';
+import 'vant/lib/index.css';
 
-// Vue.use(VueAxios, axios);
 Vue.use(VueCookie);
 Vue.use(Vant);
-
-// axios.defaults.baseURL = 'http://tim.natapp1.cc/newbuckmoo/';
-// axios.defaults.withCredentials = true;
-// Vue.prototype.$axios = axios;
+Vue.use(Animated);
 
 Vue.config.productionTip = false;
 
@@ -25,6 +20,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
+  store,
+  components: {App},
+  template: '<App/>',
 });
