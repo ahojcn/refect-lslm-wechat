@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition mode="out-in"
+                enter-active-class="animated fadeInDown"
+                leave-active-class="animated fadeOutDown"
+    >
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -27,7 +32,7 @@
           || Object.keys(res.studentInfo).length === 0) {
           state.isNewUser = true;
           this.$router.push({
-            path: '/NewUserIndex',
+            path: '/NewUser',
             query: {
               openId: this.$route.query["openId"]
             }
@@ -43,14 +48,18 @@
 
 <style>
   #app {
-    background: #f1f1fe;
+    /*background: #f1f1fe;*/
     position: relative;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     overflow: scroll;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
     padding-left: 10px;
     padding-right: 10px;
+
+    background: #74ebd5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
 </style>
