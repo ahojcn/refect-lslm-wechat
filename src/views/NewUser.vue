@@ -19,7 +19,8 @@
     <br>
     <transition mode="out-in"
                 enter-active-class="animated fadeInRight"
-                leave-active-class="animated fadeOutLeft">
+                leave-active-class="animated fadeOutLeft"
+    >
       <router-view></router-view>
     </transition>
   </div>
@@ -29,7 +30,8 @@
   export default {
     name: "NewUser",
     data() {
-      return {}
+      return {
+      }
     },
     methods: {},
     mounted() {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Notify} from 'vant';
+import {Toast, Dialog} from 'vant';
 
 // 一个 axios 实例
 const service = axios.create({
@@ -17,14 +17,16 @@ service.interceptors.response.use(
   res => {
     console.log(res);
     if (res.data.code !== 0) {
-      Notify({ type: 'warning', message: res.data.msg });
+      Toast.fail(res.data.msg);
     }
 
     return res.data;
   },
 
   err => {
-    Notify({ type: 'danger', message: '啊哦，出了点问题' });
+    Dialog.alert({
+      message: '服务器开小差啦~'
+    });
 
     return err.data;
   }
