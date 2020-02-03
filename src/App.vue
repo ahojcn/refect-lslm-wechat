@@ -10,7 +10,9 @@
       <router-view></router-view>
     </transition>
 
-    <div class="layout-footer-center">2019 &copy; 骊山鹿鸣</div>
+    <div class="layout-footer-center">
+      2019 &copy; 骊山鹿鸣
+    </div>
   </div>
 </template>
 
@@ -99,10 +101,8 @@
   }
 
   .layout-footer-center {
-    color: #fafafa;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
+    flex: 1;
   }
+
 </style>
