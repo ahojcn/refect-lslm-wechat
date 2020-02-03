@@ -1,9 +1,9 @@
 <template>
   <div>
     <van-cell-group>
-      <van-field placeholder="请输入姓名" v-model="studentInfo.name" label="姓名"></van-field>
-      <van-field placeholder="请输入学校" v-model="studentInfo.school" label="学校"></van-field>
-      <van-field placeholder="请输入学号" v-model="studentInfo.number" label="学号"></van-field>
+      <van-field placeholder="请输入姓名" maxlength="30" v-model="studentInfo.name" label="姓名"></van-field>
+      <van-field placeholder="请输入学校" maxlength="30" v-model="studentInfo.school" label="学校"></van-field>
+      <van-field placeholder="请输入学号" maxlength="30" v-model="studentInfo.number" label="学号"></van-field>
 
       <van-cell center title="学生证正面照">
         <template slot="default">
@@ -92,13 +92,13 @@
           return;
         }
 
+        let msg = "姓名：" + this.studentInfo.name + "\n"
+          + "学校：" + this.studentInfo.school + "\n"
+          + "学号：" + this.studentInfo.number + "\n"
+          + "手机号：" + this.$store.state.userInfo.userPhone + "\n";
         this.$dialog.confirm({
           title: '确认信息',
-          message: `
-                姓名：${this.studentInfo.name}<br>
-                学校：${this.studentInfo.school}<br>
-                学号：${this.studentInfo.number}<br>
-                手机号：${this.userPhone}`
+          message: msg
         }).then(() => {
           // 尝试提交学生信息
           approveStudent({
@@ -108,8 +108,10 @@
             school: this.studentInfo.school,
             number: this.studentInfo.number
           }).then(res => {
-            this.$toast('已提交，待审核！');
-            this.$router.push('/');
+            if (res.code === 0) {
+              this.$toast('已提交，待审核！');
+              this.$router.push('/');
+            }
           });
         }).catch(() => {
         });

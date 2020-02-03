@@ -1,11 +1,11 @@
 <template>
   <div>
     <van-cell-group>
-      <van-field v-model="company.name" label="企业名称" placeholder="请输入企业名称"></van-field>
-      <van-field v-model="company.owner" label="企业法人" placeholder="请输入企业法人"></van-field>
-      <van-field v-model="company.describe" type="textarea" placeholder="请输入经营范围" maxlength="50" autosize
-                 label="经营范围"></van-field>
-      <van-field v-model="company.number" label="工商注册号" placeholder="请输入工商注册号"></van-field>
+      <van-field v-model="company.name" maxlength="30" label="企业名称" placeholder="请输入企业名称"></van-field>
+      <van-field v-model="company.owner" maxlength="30" label="企业法人" placeholder="请输入企业法人"></van-field>
+      <van-field v-model="company.describe" type="textarea" placeholder="请输入经营范围" maxlength="200" autosize
+                 show-word-limit label="经营范围"></van-field>
+      <van-field v-model="company.number" maxlength="50" label="工商注册号" placeholder="请输入工商注册号"></van-field>
       <van-cell center title="营业执照">
         <template slot="default">
           <van-uploader v-model="fileList" :max-count="1" :after-read="afterRead"></van-uploader>
@@ -91,14 +91,14 @@
           return;
         }
 
+        let msg = "企业名称：" + this.company.name + "\n"
+          + "企业法人：" + this.company.owner + "\n"
+          + "经营范围：" + this.company.describe + "\n"
+          + "工商号：" + this.company.number + "\n";
+
         this.$dialog.confirm({
           title: '确认信息',
-          message: `
-            企业名称：${this.company.name}<br>
-            企业法人：${this.company.owner}<br>
-            经营范围：${this.company.describe}<br>
-            工商号：${this.company.number}
-          `
+          message: msg
         }).then(() => {
           // 提交企业认证信息
           approveCompany({
@@ -109,8 +109,10 @@
             number: this.company.number,
             certificate: this.company.certificate
           }).then(res => {
-            this.$toast('已提交，待审核！');
-            this.$router.push('/');
+            if (res.code === 0) {
+              this.$toast('已提交，待审核！');
+              this.$router.push('/');
+            }
           });
         }).catch(() => {
         });
