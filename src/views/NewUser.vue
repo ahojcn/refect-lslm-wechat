@@ -17,12 +17,18 @@
 
     <br>
     <br>
-    <transition mode="out-in"
-                enter-active-class="animated fadeInRight"
-                leave-active-class="animated fadeOutLeft"
-    >
-      <router-view></router-view>
-    </transition>
+    <van-row>
+      <van-col span="1"></van-col>
+      <van-col span="22">
+        <transition mode="out-in"
+                    enter-active-class="animated fadeInRight"
+                    leave-active-class="animated fadeOutLeft"
+        >
+          <router-view></router-view>
+        </transition>
+      </van-col>
+      <van-col span="1"></van-col>
+    </van-row>
   </div>
 </template>
 
@@ -30,8 +36,7 @@
   export default {
     name: "NewUser",
     data() {
-      return {
-      }
+      return {}
     },
     methods: {},
     mounted() {

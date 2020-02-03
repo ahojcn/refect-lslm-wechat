@@ -3,18 +3,19 @@
     <van-row>
       <van-col span="6"></van-col>
       <van-col span="12">
-        <van-button size="large" block color="linear-gradient(to right, #70e1f5, #ffd194)" to="/NewUser/Student">
-          学生认证
+        <van-button :disabled="student" size="large" block
+                    color="linear-gradient(to right, #70e1f5, #ffd194)" to="/NewUser/Student">
+          学生认证{{this.$store.state.studentInfo.auditStatusStr}}
         </van-button>
         <br>
         <br>
-        <van-button size="large" block color="linear-gradient(to right,  #eecda3, #ef629f)" to="/NewUser/Company">
-          企业认证
+        <van-button :disabled="company" size="large" block color="linear-gradient(to right,  #eecda3, #ef629f)" to="/NewUser/Company">
+          企业认证{{this.$store.state.companyInfo.auditStatusStr}}
         </van-button>
         <br>
         <br>
-        <van-button size="large" block color="linear-gradient(to right,  #4bb0ff, #6149f6)" to="/NewUser/Club">
-          学生社团认证
+        <van-button :disabled="club" size="large" block color="linear-gradient(to right,  #4bb0ff, #6149f6)" to="/NewUser/Club">
+          学生社团认证{{this.$store.state.clubInfo.auditStatusStr}}
         </van-button>
       </van-col>
       <van-col span="6"></van-col>
@@ -24,7 +25,18 @@
 
 <script>
   export default {
-    name: "Index"
+    name: "Index",
+    computed: {
+      student: function () {
+        return Object.keys(this.$store.state.studentInfo).length !== 0;
+      },
+      company: function () {
+        return Object.keys(this.$store.state.companyInfo).length !== 0;
+      },
+      club: function () {
+        return Object.keys(this.$store.state.clubInfo).length !== 0;
+      },
+    },
   }
 </script>
 

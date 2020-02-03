@@ -9,9 +9,12 @@
     </van-cell-group>
 
     <br>
-    <van-row>
+    <van-row gutter="5">
       <van-col span="4"></van-col>
-      <van-col span="16">
+      <van-col span="2">
+        <van-button icon="arrow-left" size="large" type="warning" block to="/NewUser/Index"></van-button>
+      </van-col>
+      <van-col span="14">
         <van-button icon="success" size="large" type="primary" block>
           提交
         </van-button>
@@ -49,6 +52,12 @@
       },
     },
     mounted() {
+      if (this.$store.state.userInfo.userPhone === '') {
+        this.$toast('请先绑定手机');
+        this.$router.push({
+          path: `/NewUser/BindPhone?returnPath=${this.$route.path}`,
+        });
+      }
     },
     created() {
     },

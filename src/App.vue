@@ -28,8 +28,8 @@
 
         // 判断是否是新用户
         if (Object.keys(res.clubInfo).length === 0
-          || Object.keys(res.companyInfo).length === 0
-          || Object.keys(res.studentInfo).length === 0) {
+          && Object.keys(res.companyInfo).length === 0
+          && Object.keys(res.studentInfo).length === 0) {
           state.isNewUser = true;
           this.$router.push({
             path: '/NewUser',
@@ -55,8 +55,6 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    padding-left: 10px;
-    padding-right: 10px;
 
     background: #74ebd5;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */

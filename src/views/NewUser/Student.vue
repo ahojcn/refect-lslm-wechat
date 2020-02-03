@@ -1,21 +1,6 @@
 <template>
   <div>
     <van-cell-group>
-      <van-field v-model="userPhone" @input="verifyKey = ''" placeholder="请输入手机号" type="tel" label="手机号">
-        <van-button slot="button" size="small" type="primary" @click="handleSendVerifyCode">
-          发送验证码
-        </van-button>
-      </van-field>
-      <van-field
-        v-model="verifyKey"
-        center
-        clearable
-        type="digit"
-        label="短信验证码"
-        placeholder="请输入短信验证码"
-      >
-      </van-field>
-
       <van-field placeholder="请输入姓名" v-model="studentInfo.name" label="姓名"></van-field>
       <van-field placeholder="请输入学校" v-model="studentInfo.school" label="学校"></van-field>
       <van-field placeholder="请输入学号" v-model="studentInfo.number" label="学号"></van-field>
@@ -33,7 +18,7 @@
     <van-row gutter="5">
       <van-col span="4"></van-col>
       <van-col span="2">
-        <van-button icon="arrow-left" size="large" type="warning" block @click="$router.go(-1)"></van-button>
+        <van-button icon="arrow-left" size="large" type="warning" block to="/NewUser/Index"></van-button>
       </van-col>
       <van-col span="14">
         <van-button @click="onSubmit" icon="success" size="large" type="primary" block>
@@ -64,6 +49,9 @@
         fileList: [],
         userPhone: '',
         verifyKey: '',
+        sendMsgBtnDisabled: false,
+        sendMsgBtnText: '发送验证码',
+        sendMsgTime: 30,
       }
     },
     methods: {
@@ -90,13 +78,7 @@
       },
       // 提交
       onSubmit() {
-        if (this.userPhone === '') {
-          this.$toast('请输入手机号');
-          return;
-        } else if (this.verifyKey === '') {
-          this.$toast('请输入短信验证码');
-          return;
-        } else if (this.studentInfo.name === '') {
+        if (this.studentInfo.name === '') {
           this.$toast('请输入姓名');
           return;
         } else if (this.studentInfo.school === '') {
@@ -110,37 +92,26 @@
           return;
         }
 
-        // 先尝试绑定手机
-        bindPhone({
-          openId: this.$store.state.userInfo.openId,
-          phone: this.userPhone,
-          verifyKey: this.verifyKey
-        }).then(res => {
-          if (res.code === 0) {
-            this.$dialog.confirm({
-              title: '确认信息',
-              message: `
-                姓名：${this.studentInfo.name}
-                <br>
-                学校：${this.studentInfo.school}
-                <br>
-                学号：${this.studentInfo.number}
-                <br>
+        this.$dialog.confirm({
+          title: '确认信息',
+          message: `
+                姓名：${this.studentInfo.name}<br>
+                学校：${this.studentInfo.school}<br>
+                学号：${this.studentInfo.number}<br>
                 手机号：${this.userPhone}`
-            }).then(() => {
-              // 尝试提交学生信息
-              approveStudent({
-                openId: this.$store.state.userInfo.openId,
-                certificate: this.studentInfo.certificate,
-                name: this.studentInfo.name,
-                school: this.studentInfo.school,
-                number: this.studentInfo.number
-              }).then(res => {
-                console.log(res);
-                this.$toast('OK，已提交~');
-              });
-            });
-          }
+        }).then(() => {
+          // 尝试提交学生信息
+          approveStudent({
+            openId: this.$store.state.userInfo.openId,
+            certificate: this.studentInfo.certificate,
+            name: this.studentInfo.name,
+            school: this.studentInfo.school,
+            number: this.studentInfo.number
+          }).then(res => {
+            this.$toast('已提交，待审核！');
+            this.$router.push('/');
+          });
+        }).catch(() => {
         });
       },
       // 发送短信验证码
@@ -154,12 +125,32 @@
           phone: this.userPhone
         }).then(res => {
           if (res.code === 0) {
+            this.sendMsgBtnDisabled = true;
+
+            let id = setInterval(() => {
+              this.sendMsgBtnText = `${this.sendMsgTime}秒后重新发送`;
+              this.sendMsgTime -= 1;
+            }, 1000);
+
+            setTimeout(() => {
+              clearInterval(id);
+              this.sendMsgBtnDisabled = false;
+              this.sendMsgBtnText = '发送验证码';
+              this.sendMsgTime = 30;
+            }, 1000 * 30);
+
             this.$toast('OK, 请注意查收~');
           }
         });
       },
     },
     mounted() {
+      if (this.$store.state.userInfo.userPhone === '') {
+        this.$toast('请先绑定手机');
+        this.$router.push({
+          path: `/NewUser/BindPhone?returnPath=${this.$route.path}`,
+        });
+      }
     },
   }
 </script>
