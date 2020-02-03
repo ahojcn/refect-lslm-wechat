@@ -6,6 +6,7 @@
           round
           width="100px"
           height="100px"
+          style="background-color: transparent;box-shadow:0px 0px 8px 5px #ccc;"
           :src="$store.state.userInfo.userIcon">
         </van-image>
         <br>
