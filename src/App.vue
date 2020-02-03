@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <van-notice-bar text="功能开发、测试阶段，请勿使用！面对疫情：勤洗手、多通风、带好口罩！不传谣、不信谣！" left-icon="volume-o"></van-notice-bar>
+    <van-notice-bar text="功能开发、测试阶段，请勿使用！面对疫情：勤洗手、多通风、带好口罩！功能开发、测试阶段，请勿使用！不传谣、不信谣！功能开发、测试阶段，请勿使用！"
+                    left-icon="volume-o"></van-notice-bar>
 
     <transition mode="out-in"
                 enter-active-class="animated fadeInDown"

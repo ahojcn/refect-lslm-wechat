@@ -10,7 +10,7 @@
         </van-image>
         <br>
         <span style="font-weight: 700;">
-          Hi {{$store.state.userInfo.userName}}
+          {{$store.state.userInfo.userName}}
         </span>
       </div>
     </div>
