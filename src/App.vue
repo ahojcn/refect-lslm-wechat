@@ -39,7 +39,8 @@
           this.$router.push({
             path: '/NewUser',
             query: {
-              openId: this.$route.query["openId"]
+              openId: this.$route.query["openId"],
+              query: this.$route.query
             }
           });
         }

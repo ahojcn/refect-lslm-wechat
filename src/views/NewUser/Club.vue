@@ -91,6 +91,15 @@
         this.$toast('请先绑定手机');
         this.$router.push({
           path: `/NewUser/BindPhone?returnPath=${this.$route.path}`,
+          query: this.$route.query
+        });
+      }
+
+      if (this.$route.query.stu === '1') {
+        this.$toast('请先注册为学生用户');
+        this.$router.push({
+          path: '/NewUser/Student',
+          query: this.$route.query
         });
       }
     },

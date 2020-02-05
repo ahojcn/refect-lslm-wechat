@@ -9,12 +9,14 @@
         </van-button>
         <br>
         <br>
-        <van-button :disabled="company" size="large" block color="linear-gradient(to right,  #eecda3, #ef629f)" to="/NewUser/Company">
+        <van-button :disabled="company" size="large" block color="linear-gradient(to right,  #eecda3, #ef629f)"
+                    to="/NewUser/Company">
           企业认证{{this.$store.state.companyInfo.auditStatusStr}}
         </van-button>
         <br>
         <br>
-        <van-button :disabled="club" size="large" block color="linear-gradient(to right,  #4bb0ff, #6149f6)" to="/NewUser/Club">
+        <van-button :disabled="club" size="large" block color="linear-gradient(to right,  #4bb0ff, #6149f6)"
+                    :to="toClub">
           学生社团认证{{this.$store.state.clubInfo.auditStatusStr}}
         </van-button>
       </van-col>
@@ -36,6 +38,14 @@
       club: function () {
         return Object.keys(this.$store.state.clubInfo).length !== 0;
       },
+
+      toClub: function () {
+        if (Object.keys(this.$store.state.studentInfo).length === 0) {  // 如果没有学生信息
+          return "/NewUser/Club?stu=1";
+        }
+
+        return "/NewUser/Club";
+      }
     },
   }
 </script>

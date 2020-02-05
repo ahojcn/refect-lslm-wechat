@@ -112,7 +112,13 @@
           }).then(res => {
             if (res.code === 0) {
               this.$toast('已提交，待审核！');
-              this.$router.push('/');
+              if (this.$route.query.stu === '1') {
+                this.$router.push({
+                  path: '/NewUser/Club'
+                });
+              } else {
+                this.$router.push('/');
+              }
             }
           });
         }).catch(() => {
@@ -153,6 +159,7 @@
         this.$toast('请先绑定手机');
         this.$router.push({
           path: `/NewUser/BindPhone?returnPath=${this.$route.path}`,
+          query: this.$route.query
         });
       }
     },

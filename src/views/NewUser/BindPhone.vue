@@ -110,6 +110,7 @@
             }).then(() => {
               this.$router.push({
                 path: this.$route.query['returnPath'] === undefined ? '/' : this.$route.query['returnPath'],
+                query: this.$route.query,
               });
             });
           }
