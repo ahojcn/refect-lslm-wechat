@@ -14,6 +14,10 @@ Vue.use(VueCookie);
 Vue.use(Vant);
 Vue.use(Animated);
 
+router.beforeEach((to, from, next) => {
+  next();
+});
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

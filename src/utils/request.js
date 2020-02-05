@@ -6,7 +6,7 @@ const service = axios.create({
   // baseURL: 'http://tim.natapp1.cc/newbuckmoo/',
   baseURL: 'http://lslm.live/newbuckmoo/',
   withCredentials: true,  // send cookies when cross-domain requests
-  timeout: 5000,  // request timeout
+  // timeout: 5000,  // request timeout
 });
 
 // request 拦截器

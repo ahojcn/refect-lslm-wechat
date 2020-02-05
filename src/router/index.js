@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import Index from '@/views/Index';
+
 import NewUser from '@/views/NewUser';
 import NewUserIndex from '@/views/NewUser/Index';
 import NewUserBindPhone from '@/views/NewUser/BindPhone';
@@ -8,11 +10,26 @@ import NewUserStudent from '@/views/NewUser/Student';
 import NewUserCompany from '@/views/NewUser/Company';
 import NewUserClub from '@/views/NewUser/Club';
 
+import PartTimeJob from '@/views/PartTimeJob';
+
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/',
+      name: 'Index',
+      component: Index,
+      redirect: '/PartTimeJob',
+      children: [
+        {
+          path: '/PartTimeJob',
+          name: 'PartTimeJob',
+          component: PartTimeJob,
+        },
+      ]
+    },
     {
       path: '/NewUser',
       name: 'NewUser',

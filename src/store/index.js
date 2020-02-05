@@ -12,14 +12,12 @@ let store = new Vuex.Store({
     studentInfo: {},
     userInfo: {},
     isNewUser: false,
+
+    activeTabBar: 'home',
   },
   getters: {},
   mutations: {},
   actions: {
-    // 获取用户详细信息
-    updateInfo(store, data) {
-    },
-
   },
 });
 

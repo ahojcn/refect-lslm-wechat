@@ -65,13 +65,16 @@
         uploadFile(file.file, e => {
           if (e.lengthComputable) {
             let rate = this.uploadRate = e.loaded / e.total * 100;  //已上传的比例
-            if (rate < 100) {
-              this.uploadRate = rate;
+            rate = rate.toFixed(0);
+            if (rate === '100') {
+              rate = 99;
             }
+            this.uploadRate = rate;
           }
         }).then(res => {
           if (res.code === 0) {
             this.$toast('上传成功!');
+            this.uploadRate = 100;
             this.studentInfo.certificate = res.data;
           }
         });

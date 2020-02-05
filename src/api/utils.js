@@ -3,9 +3,9 @@ import request from '@/utils/request';
 /**
  * 上传文件至文件服务器
  * @param file 文件
- * @param func 上传进度处理函数
+ * @param callback 上传进度处理函数
  */
-export function uploadFile(file, func) {
+export function uploadFile(file, callback) {
   let fd = new FormData();
   fd.append('file', file);
 
@@ -16,6 +16,6 @@ export function uploadFile(file, func) {
     data: fd,
     contentType: false,
     processData: false,
-    onUploadProgress: func,
+    onUploadProgress: callback,
   })
 }
