@@ -53,11 +53,6 @@
     methods: {
       // 上传文件
       afterRead(file) {
-        this.$toast.loading({
-          message: '上传中',
-          forbidClick: true
-        });
-
         uploadFile(file.file, e => {
           if (e.lengthComputable) {
             let rate = this.uploadRate = e.loaded / e.total * 100;  //已上传的比例
@@ -65,6 +60,10 @@
             if (rate === '100') {
               rate = 99;
             }
+            this.$toast.loading({
+              message: `上传进度\n${rate}%`,
+              forbidClick: true
+            });
             this.uploadRate = rate;
           }
         }).then(res => {
