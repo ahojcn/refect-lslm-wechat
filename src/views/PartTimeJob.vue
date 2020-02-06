@@ -22,16 +22,9 @@
     },
     methods: {},
     mounted() {
-      getPositionList({
-        page: 0,
-        size: 5,
-        openId: this.$store.state.userInfo.openId
-      }).then(res=>{
-        console.log(res);
-      });
 
       getPositionCategories().then(res => {
-        res.data.forEach((item,index)=>{
+        res.data.forEach((item, index) => {
           this.categories.push({
             text: item.categoryName,
             value: item.categoryId

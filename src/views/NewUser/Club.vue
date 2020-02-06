@@ -46,10 +46,10 @@
     data() {
       return {
         club: {
-          clubName: this.$store.state.clubInfo ? this.$store.state.clubInfo.clubName : '',
-          clubDesc: this.$store.state.clubInfo ? this.$store.state.clubInfo.clubDesc : '',
-          schoolName: this.$store.state.clubInfo ? this.$store.state.clubInfo.schoolName : '',
-          ownerName: this.$store.state.clubInfo ? this.$store.state.clubInfo.ownerName : '',
+          clubName: this.$store.state.clubInfo.clubName ? this.$store.state.clubInfo.clubName : '',
+          clubDesc: this.$store.state.clubInfo.clubDesc ? this.$store.state.clubInfo.clubDesc : '',
+          schoolName: this.$store.state.clubInfo.schoolName ? this.$store.state.clubInfo.schoolName : '',
+          ownerName: this.$store.state.clubInfo.ownerName ? this.$store.state.clubInfo.ownerName : '',
           clubCode: '',
         },
       }

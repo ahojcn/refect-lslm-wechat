@@ -49,10 +49,10 @@
     data() {
       return {
         studentInfo: {
-          certificate: this.$store.state.studentInfo ? this.$store.state.studentInfo.studentCertificate : '',
-          name: this.$store.state.studentInfo ? this.$store.state.studentInfo.studentName : '',
-          school: this.$store.state.studentInfo ? this.$store.state.studentInfo.studentSchool : '',
-          number: this.$store.state.studentInfo ? this.$store.state.studentInfo.studentId : '',
+          certificate: this.$store.state.studentInfo.studentCertificate ? this.$store.state.studentInfo.studentCertificate : '',
+          name: this.$store.state.studentInfo.studentName ? this.$store.state.studentInfo.studentName : '',
+          school: this.$store.state.studentInfo.studentSchool ? this.$store.state.studentInfo.studentSchool : '',
+          number: this.$store.state.studentInfo.studentId ? this.$store.state.studentInfo.studentId : '',
         },
         uploadRate: 0,
         fileList: [],

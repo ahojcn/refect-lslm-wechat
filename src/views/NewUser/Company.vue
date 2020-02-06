@@ -20,7 +20,8 @@
                  placeholder="请输入工商注册号"></van-field>
       <van-cell center title="营业执照">
         <template slot="default">
-          <van-image v-if="editable" width="100" height="100" :src="$store.state.companyInfo.companyCertificate"></van-image>
+          <van-image v-if="editable" width="100" height="100"
+                     :src="$store.state.companyInfo.companyCertificate"></van-image>
           <van-uploader v-if="!editable" v-model="fileList" :max-count="1" :after-read="afterRead"></van-uploader>
         </template>
       </van-cell>
@@ -53,11 +54,11 @@
     data() {
       return {
         company: {
-          name: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyName : '',
-          owner: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyOwnerName : '',
-          describe: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyDesc : '',
-          number: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyId : '',
-          certificate: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyCertificate : '',
+          name: this.$store.state.companyInfo.companyName ? this.$store.state.companyInfo.companyName : '',
+          owner: this.$store.state.companyInfo.companyOwnerName ? this.$store.state.companyInfo.companyOwnerName : '',
+          describe: this.$store.state.companyInfo.companyDesc ? this.$store.state.companyInfo.companyDesc : '',
+          number: this.$store.state.companyInfo.companyId ? this.$store.state.companyInfo.companyId : '',
+          certificate: this.$store.state.companyInfo.companyCertificate ? this.$store.state.companyInfo.companyCertificate : '',
         },
         uploadRate: 0,
         fileList: [],
