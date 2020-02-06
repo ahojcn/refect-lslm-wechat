@@ -1,5 +1,15 @@
 <template>
   <div id="app">
+    <van-overlay :show="$store.state.userInfo.openId !== 'oxrwq0xrKKyqiAGE8O9TM3L1yaQY'">
+      <div style="display: flex;align-items: center;justify-content: center;height: 100%;">
+        <div style="background-color: #fff;">
+          <span style="font-weight: 700; color: darkred">
+            开发进行中！<br>请勿使用！
+          </span>
+        </div>
+      </div>
+    </van-overlay>
+
     <transition mode="out-in"
                 enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut"
@@ -18,6 +28,7 @@
       return {}
     },
     mounted() {
+      // 获取用户信息
       getUserInfo({openId: this.$route.query["openId"]}).then(res => {
         res = res.data;
         let state = this.$store.state;
@@ -26,10 +37,12 @@
         state.companyInfo = res.companyInfo;
         state.studentInfo = res.studentInfo;
 
-        // 判断是否是新用户
-        if (Object.keys(res.clubInfo).length === 0
-          && Object.keys(res.companyInfo).length === 0
-          && Object.keys(res.studentInfo).length === 0) {
+        // 判断是否是新用户 || 没有一个身份审核通过的
+        if ((Object.keys(res.clubInfo).length === 0 || res.clubInfo.auditStatus !== 1)
+          &&
+          (Object.keys(res.companyInfo).length === 0 || res.companyInfo.auditStatus !== 1)
+          &&
+          (Object.keys(res.studentInfo).length === 0 || res.studentInfo.auditStatus !== 1)) {
 
           state.isNewUser = true;
           let msg = '亲爱滴，' + this.$store.state.userInfo.userName + '\n请先完善信息哟~';

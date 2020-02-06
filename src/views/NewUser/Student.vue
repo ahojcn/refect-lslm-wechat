@@ -1,13 +1,22 @@
 <template>
   <div>
+    <div v-if="editable" style="text-align: center">
+      <div style="display: inline;">
+        <span style="color: red">
+          信息审核中，暂时不能修改哦~
+        </span>
+      </div>
+    </div>
+
     <van-cell-group>
-      <van-field placeholder="请输入姓名" maxlength="30" v-model="studentInfo.name" label="姓名"></van-field>
-      <van-field placeholder="请输入学校" maxlength="30" v-model="studentInfo.school" label="学校"></van-field>
-      <van-field placeholder="请输入学号" maxlength="30" v-model="studentInfo.number" label="学号"></van-field>
+      <van-field :disabled="editable" placeholder="请输入姓名" maxlength="30" v-model="studentInfo.name" label="姓名"></van-field>
+      <van-field :disabled="editable" placeholder="请输入学校" maxlength="30" v-model="studentInfo.school" label="学校"></van-field>
+      <van-field :disabled="editable" placeholder="请输入学号" maxlength="30" v-model="studentInfo.number" label="学号"></van-field>
 
       <van-cell center title="学生证正面照">
         <template slot="default">
-          <van-uploader v-model="fileList" :max-count="1" :after-read="afterRead"></van-uploader>
+          <van-image v-if="editable" width="100" height="100" :src="$store.state.studentInfo.studentCertificate"></van-image>
+          <van-uploader v-if="!editable" v-model="fileList" :max-count="1" :after-read="afterRead"></van-uploader>
         </template>
       </van-cell>
       <van-progress color="linear-gradient(to right, #ACB6E5, #74ebd5)" :show-pivot="true"
@@ -33,17 +42,17 @@
 <script>
   import {uploadFile} from '@/api/utils';
   import {approveStudent} from '@/api/approve';
-  import {sendVerifyKey, bindPhone} from '@/api/basic-info';
+  import {sendVerifyKey} from '@/api/basic-info';
 
   export default {
     name: "Student",
     data() {
       return {
         studentInfo: {
-          certificate: '',
-          name: '',
-          school: '',
-          number: '',
+          certificate: this.$store.state.studentInfo ? this.$store.state.studentInfo.studentCertificate : '',
+          name: this.$store.state.studentInfo ? this.$store.state.studentInfo.studentName : '',
+          school: this.$store.state.studentInfo ? this.$store.state.studentInfo.studentSchool : '',
+          number: this.$store.state.studentInfo ? this.$store.state.studentInfo.studentId : '',
         },
         uploadRate: 0,
         fileList: [],
@@ -53,6 +62,13 @@
         sendMsgBtnText: '发送验证码',
         sendMsgTime: 30,
       }
+    },
+    computed: {
+      // 是否可以编辑
+      // 如果是审核中则不能编辑
+      editable: function () {
+        return this.$store.state.studentInfo.auditStatus === 0;
+      },
     },
     methods: {
       // 上传文件处理
@@ -155,6 +171,8 @@
       },
     },
     mounted() {
+      console.log(this.$store.state);
+
       if (this.$store.state.userInfo.userPhone === '') {
         this.$toast('请先绑定手机');
         this.$router.push({

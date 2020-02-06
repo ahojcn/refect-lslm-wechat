@@ -1,14 +1,27 @@
 <template>
   <div>
+    <div v-if="editable" style="text-align: center">
+      <div style="display: inline;">
+        <span style="color: red">
+          信息审核中，暂时不能修改哦~
+        </span>
+      </div>
+    </div>
+
     <van-cell-group>
-      <van-field v-model="company.name" maxlength="30" label="企业名称" placeholder="请输入企业名称"></van-field>
-      <van-field v-model="company.owner" maxlength="30" label="企业法人" placeholder="请输入企业法人"></van-field>
-      <van-field v-model="company.describe" type="textarea" placeholder="请输入经营范围" maxlength="200" autosize
+      <van-field :disabled="editable" v-model="company.name" maxlength="30" label="企业名称"
+                 placeholder="请输入企业名称"></van-field>
+      <van-field :disabled="editable" v-model="company.owner" maxlength="30" label="企业法人"
+                 placeholder="请输入企业法人"></van-field>
+      <van-field :disabled="editable" v-model="company.describe" type="textarea" placeholder="请输入经营范围" maxlength="200"
+                 autosize
                  show-word-limit label="经营范围"></van-field>
-      <van-field v-model="company.number" maxlength="50" label="工商注册号" placeholder="请输入工商注册号"></van-field>
+      <van-field :disabled="editable" v-model="company.number" maxlength="50" label="工商注册号"
+                 placeholder="请输入工商注册号"></van-field>
       <van-cell center title="营业执照">
         <template slot="default">
-          <van-uploader v-model="fileList" :max-count="1" :after-read="afterRead"></van-uploader>
+          <van-image v-if="editable" width="100" height="100" :src="$store.state.companyInfo.companyCertificate"></van-image>
+          <van-uploader v-if="!editable" v-model="fileList" :max-count="1" :after-read="afterRead"></van-uploader>
         </template>
       </van-cell>
       <van-progress color="linear-gradient(to right, #ACB6E5, #74ebd5)" :show-pivot="true"
@@ -40,15 +53,22 @@
     data() {
       return {
         company: {
-          name: '',
-          owner: '',
-          describe: '',
-          number: '',
-          certificate: '',
+          name: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyName : '',
+          owner: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyOwnerName : '',
+          describe: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyDesc : '',
+          number: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyId : '',
+          certificate: this.$store.state.companyInfo ? this.$store.state.companyInfo.companyCertificate : '',
         },
         uploadRate: 0,
         fileList: [],
       }
+    },
+    computed: {
+      // 是否可以编辑
+      // 如果是审核中则不能编辑
+      editable: function () {
+        return this.$store.state.companyInfo.auditStatus === 0;
+      },
     },
     methods: {
       // 上传文件
@@ -70,7 +90,7 @@
           if (res.code === 0) {
             this.$toast('上传成功!');
             this.uploadRate = 100;
-            this.studentInfo.certificate = res.data;
+            this.company.certificate = res.data;
           }
         });
       },

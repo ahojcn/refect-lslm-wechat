@@ -16,7 +16,12 @@ let store = new Vuex.Store({
     activeTabBar: 'home',
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    // 设置 TabBar
+    setActiveTabBar(state, name) {
+      state.activeTabBar = name;
+    },
+  },
   actions: {
     // 更新用户信息
     updateUserInfo(store) {

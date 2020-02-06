@@ -1,12 +1,25 @@
 <template>
   <div>
+    <div v-if="editable" style="text-align: center">
+      <div style="display: inline;">
+        <span style="color: red">
+          信息审核中，暂时不能修改哦~
+        </span>
+      </div>
+    </div>
+
     <van-cell-group>
-      <van-field placeholder="请输入社团名" v-model="club.clubName" label="社团名" maxlength="30"></van-field>
-      <van-field placeholder="请输入社团职责" v-model="club.clubDesc" type="textarea" maxlength="200" show-word-limit
+      <van-field :disabled="editable" placeholder="请输入社团名" v-model="club.clubName" label="社团名"
+                 maxlength="30"></van-field>
+      <van-field :disabled="editable" placeholder="请输入社团职责" v-model="club.clubDesc" type="textarea" maxlength="200"
+                 show-word-limit
                  autosize label="社团职责"></van-field>
-      <van-field placeholder="请输入所属学校" v-model="club.schoolName" label="学校" maxlength="30"></van-field>
-      <van-field placeholder="请输入社团负责人姓名" v-model="club.ownerName" label="社团负责人" maxlength="30"></van-field>
-      <van-field placeholder="请输入邀请码" v-model="club.clubCode" label="邀请码" maxlength="30"></van-field>
+      <van-field :disabled="editable" placeholder="请输入所属学校" v-model="club.schoolName" label="学校"
+                 maxlength="30"></van-field>
+      <van-field :disabled="editable" placeholder="请输入社团负责人姓名" v-model="club.ownerName" label="社团负责人"
+                 maxlength="30"></van-field>
+      <van-field :disabled="editable" placeholder="请输入邀请码" v-model="club.clubCode" label="邀请码"
+                 maxlength="30"></van-field>
     </van-cell-group>
 
     <br>
@@ -33,13 +46,20 @@
     data() {
       return {
         club: {
-          clubName: '',
-          clubDesc: '',
-          schoolName: '',
-          ownerName: '',
-          clubCode: ''
+          clubName: this.$store.state.clubInfo ? this.$store.state.clubInfo.clubName : '',
+          clubDesc: this.$store.state.clubInfo ? this.$store.state.clubInfo.clubDesc : '',
+          schoolName: this.$store.state.clubInfo ? this.$store.state.clubInfo.schoolName : '',
+          ownerName: this.$store.state.clubInfo ? this.$store.state.clubInfo.ownerName : '',
+          clubCode: '',
         },
       }
+    },
+    computed: {
+      // 是否可以编辑
+      // 如果是审核中则不能编辑
+      editable: function () {
+        return this.$store.state.clubInfo.auditStatus === 0;
+      },
     },
     methods: {
       // 提交
