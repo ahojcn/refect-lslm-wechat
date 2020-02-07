@@ -22,6 +22,15 @@
     },
     methods: {},
     mounted() {
+      this.$store.dispatch('updateUserInfo', this.$route.query["openId"]).then((res) => {
+        getPositionList({
+          page: 0,
+          size: 5,
+          openId: this.$store.state.userInfo.openId
+        }).then(res => {
+          console.log(res);
+        });
+      });
 
       getPositionCategories().then(res => {
         res.data.forEach((item, index) => {

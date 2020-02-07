@@ -24,14 +24,16 @@ let store = new Vuex.Store({
   },
   actions: {
     // 更新用户信息
-    updateUserInfo(store) {
-      getUserInfo({openId: store.state.userInfo.openId}).then(res => {
+    updateUserInfo(store, openId) {
+      return getUserInfo({openId: openId}).then(res => {
         res = res.data;
         let state = store.state;
         state.userInfo = res.userInfo;
         state.clubInfo = res.clubInfo;
         state.companyInfo = res.companyInfo;
         state.studentInfo = res.studentInfo;
+
+        return res;
       });
     },
   },

@@ -15,9 +15,11 @@ service.interceptors.request.use();
 // response 拦截器
 service.interceptors.response.use(
   res => {
-    console.log(res);
     if (res.data.code !== 0) {
-      Toast.fail(res.data.msg);
+      // Toast.fail(res.data.msg);
+      Dialog.alert({
+        message: res.data.msg
+      });
     }
 
     return res.data;

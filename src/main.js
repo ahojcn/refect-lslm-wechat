@@ -15,6 +15,8 @@ Vue.use(Vant);
 Vue.use(Animated);
 
 router.beforeEach((to, from, next) => {
+  // store.dispatch('updateUserInfo');
+
   next();
 });
 
