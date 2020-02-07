@@ -12,6 +12,8 @@ import NewUserClub from '@/views/NewUser/Club';
 
 import PartTimeJob from '@/views/PartTimeJob';
 
+import Home from '@/views/Home';
+
 Vue.use(Router);
 
 export default new Router({
@@ -27,6 +29,11 @@ export default new Router({
           path: '/PartTimeJob',
           name: 'PartTimeJob',
           component: PartTimeJob,
+        },
+        {
+          path: '/Home',
+          name: 'Home',
+          component: Home,
         },
       ]
     },

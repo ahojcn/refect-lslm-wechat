@@ -1,15 +1,5 @@
 <template>
   <div id="app">
-    <van-overlay :show="$store.state.userInfo.openId !== 'oxrwq0xrKKyqiAGE8O9TM3L1yaQY'">
-      <div style="display: flex;align-items: center;justify-content: center;height: 100%;">
-        <div style="background-color: #fff;">
-          <span style="font-weight: 700; color: darkred">
-            开发进行中！<br>请勿使用！
-          </span>
-        </div>
-      </div>
-    </van-overlay>
-
     <transition mode="out-in"
                 enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut"
