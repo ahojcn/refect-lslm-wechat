@@ -1,5 +1,9 @@
 <template>
   <div>
+    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa'}">
+      学生社团认证
+    </van-divider>
+
     <div v-if="editable" style="text-align: center">
       <div style="display: inline;">
         <span style="color: red">
@@ -89,6 +93,12 @@
           title: '确认信息',
           message: msg
         }).then(res => {
+          this.$toast.loading({
+            message: '处理中...',
+            forbidClick: true,
+            loadingType: 'spinner'
+          });
+
           approveClub({
             openId: this.$store.state.userInfo.openId,
             clubName: this.club.clubName,

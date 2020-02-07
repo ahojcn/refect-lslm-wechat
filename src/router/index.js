@@ -9,6 +9,7 @@ import NewUserBindPhone from '@/views/NewUser/BindPhone';
 import NewUserStudent from '@/views/NewUser/Student';
 import NewUserCompany from '@/views/NewUser/Company';
 import NewUserClub from '@/views/NewUser/Club';
+import NewUserResume from '@/views/NewUser/Resume';
 
 import PartTimeJob from '@/views/PartTimeJob';
 
@@ -33,7 +34,7 @@ export default new Router({
         {
           path: '/Home',
           name: 'Home',
-          component: Home,
+          component: Home
         },
       ]
     },
@@ -47,6 +48,11 @@ export default new Router({
           path: '/NewUser/Index',
           name: 'NewUserIndex',
           component: NewUserIndex
+        },
+        {
+          path: '/NewUser/Resume',
+          name: 'NewUserResume',
+          component: NewUserResume
         },
         {
           path: '/NewUser/Student',

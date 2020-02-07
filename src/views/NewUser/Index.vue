@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-top: 20px">
     <van-row>
       <van-col span="6"></van-col>
       <van-col span="12">

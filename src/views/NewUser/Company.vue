@@ -1,5 +1,9 @@
 <template>
   <div>
+    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa'}">
+      企业认证
+    </van-divider>
+
     <div v-if="editable" style="text-align: center">
       <div style="display: inline;">
         <span style="color: red">
@@ -123,6 +127,12 @@
           title: '确认信息',
           message: msg
         }).then(() => {
+          this.$toast.loading({
+            message: '处理中...',
+            forbidClick: true,
+            loadingType: 'spinner'
+          });
+
           // 提交企业认证信息
           approveCompany({
             openId: this.$store.state.userInfo.openId,

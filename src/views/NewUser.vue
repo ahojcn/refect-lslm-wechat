@@ -16,8 +16,6 @@
       </div>
     </div>
 
-    <br>
-    <br>
     <van-row>
       <van-col span="1"></van-col>
       <van-col span="22">

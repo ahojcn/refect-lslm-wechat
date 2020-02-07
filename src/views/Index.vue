@@ -22,7 +22,7 @@
       <van-tabbar-item name="ActiveCenter" icon="search">
         活动中心
       </van-tabbar-item>
-      <van-tabbar-item name="SelfCenter" icon="friends-o">
+      <van-tabbar-item name="Home" icon="friends-o">
         个人中心
       </van-tabbar-item>
     </van-tabbar>

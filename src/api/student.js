@@ -3,7 +3,7 @@ import request from '@/utils/request';
 // 学生简历信息上传
 export function uploadStudentResume(data) {
   return request({
-    url: 'approve/student',
+    url: 'student/resume/upload',
     method: 'post',
     data
   })

@@ -29,6 +29,16 @@
           openId: this.$store.state.userInfo.openId
         }).then(res => {
           console.log(res);
+          if (res.code === 14) {  // 如果是学生用户，没有完善简历
+            // 跳转到完善简历页面
+            this.$router.push({
+              path: '/NewUser/Resume',
+              query: {
+                openId: this.$route.query["openId"]
+              }
+            });
+          }
+
         });
       });
 
