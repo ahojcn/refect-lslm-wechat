@@ -16,13 +16,13 @@
     </transition>
 
     <van-tabbar v-model="$store.state.activeTabBar">
-      <van-tabbar-item name="PartTimeJob" icon="home-o">
+      <van-tabbar-item name="PartTimeJob" icon="like" to="/PartTimeJob">
         兼职广场
       </van-tabbar-item>
-      <van-tabbar-item name="ActiveCenter" icon="search">
+      <van-tabbar-item name="ActiveCenter" icon="star">
         活动中心
       </van-tabbar-item>
-      <van-tabbar-item name="Home" icon="friends-o">
+      <van-tabbar-item name="Home" icon="wap-home" to="/Home">
         个人中心
       </van-tabbar-item>
     </van-tabbar>

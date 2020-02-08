@@ -22,7 +22,7 @@
     },
     methods: {},
     mounted() {
-      this.$store.dispatch('updateUserInfo', this.$route.query["openId"]).then((res) => {
+      this.$store.dispatch('updateUserInfo', localStorage.getItem('openId')).then((res) => {
         getPositionList({
           page: 0,
           size: 5,

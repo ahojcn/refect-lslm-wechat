@@ -20,6 +20,7 @@
     mounted() {
     },
     beforeCreate() {
+      localStorage.setItem('openId', this.$route.query["openId"]);
 
       // 更新用户信息
       this.$store.dispatch('updateUserInfo', this.$route.query["openId"]).then((res) => {

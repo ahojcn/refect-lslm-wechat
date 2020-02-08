@@ -123,6 +123,22 @@
       },
 
       onSubmit() {
+        if (this.resumeName === ''
+          || this.resumeSex === ''
+          || this.resumeAge === ''
+          || this.resumeEducationStr === ''
+          || this.resumeHistory === ''
+          || this.resumeAddress === ''
+          || this.resumeWork === ''
+          || this.resumeWorkCategoryStr === ''
+          || this.resumeHopeMoney === ''
+          || this.resumeLanguage === ''
+          || this.resumeCredential === ''
+          || this.resumeAboutMyself === '') {
+          this.$toast.fail('请完善简历~');
+          return;
+        }
+
         let msg =
           "姓名：" + this.resumeName +
           "\n性别：" + this.resumeSex +

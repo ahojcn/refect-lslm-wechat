@@ -21,12 +21,13 @@
       <div>
         <van-divider content-position="left"
                      :style="{ color: '#ff976a', borderColor: '#ff976a'}">
-          我的
+          个人信息
         </van-divider>
-        <van-grid :column-num="3">
+        <van-grid :column-num="4" :gutter="1">
+          <van-grid-item icon="edit" text="我的简历" to="/NewUser/Resume"></van-grid-item>
           <van-grid-item icon="photo-o" text="文字"></van-grid-item>
           <van-grid-item icon="photo-o" text="文字"></van-grid-item>
-          <van-grid-item icon="photo-o" text="文字"></van-grid-item>
+          <van-grid-item icon="award-o" text="身份认证" to="/NewUser/Index"></van-grid-item>
         </van-grid>
       </div>
 

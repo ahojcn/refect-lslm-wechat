@@ -33,6 +33,9 @@ let store = new Vuex.Store({
         state.companyInfo = res.companyInfo;
         state.studentInfo = res.studentInfo;
 
+        // 保存 openId
+        localStorage.setItem('openId', res.userInfo.openId);
+
         return res;
       });
     },
