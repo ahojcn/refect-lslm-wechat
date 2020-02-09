@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <van-overlay :show="$store.state.show"></van-overlay>
+
     <transition mode="out-in"
                 enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut"

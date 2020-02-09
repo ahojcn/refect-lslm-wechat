@@ -14,6 +14,8 @@ let store = new Vuex.Store({
     isNewUser: false,
 
     activeTabBar: 'home',
+
+    show: false,
   },
   getters: {},
   mutations: {
