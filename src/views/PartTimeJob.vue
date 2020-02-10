@@ -16,8 +16,11 @@
              :key="item.positionId"
              style="padding-top: 3px;transition: all 1s;display: inline-block; width: 100%">
           <van-card @click="onClickCard(item)">
-            <div class="shine" slot="title" style="font-weight: 700; font-size: 15px">
+            <div slot="title" style="font-weight: 700; font-size: 15px">
               {{item.positionName}}
+              <span v-if="item.positionTop === 1" style="float: right">
+                <van-icon name="fire-o" color="red"></van-icon>
+              </span>
             </div>
 
             <div slot="desc" style="padding-top: 5px">
@@ -50,9 +53,88 @@
 
       <van-popup
         v-model="showCurrentData"
+        closeable
         round
         position="bottom"
-        :style="{ height: '70%' }">
+        :style="{ height: '90%' }">
+        <div style="padding: 20px;">
+          <div>
+            <span style="font-weight: 700; font-size: 20px;">
+              {{currentData.positionName}}
+            </span>
+
+            <div style="padding-top: 10px;">
+              <van-tag size="large" plain type="danger">
+                招{{currentData.positionPeopleNum}}人
+              </van-tag>
+              <van-tag size="large" plain type="danger">
+                {{currentData.positionClearingWayStr}}
+              </van-tag>
+              <van-tag size="large" mark type="danger">
+                {{currentData.positionMoney}}
+              </van-tag>
+            </div>
+
+            <div style="padding-top: 10px; color: #9a9da0">
+              <span v-for="c in currentData.categoryList" :key="c.categoryId">
+                {{c.categoryName}} |
+              </span>
+              <span>
+                {{currentData.positionBrowse}}次浏览
+              </span>
+              <span style="float: right">
+                {{new Date(currentData.createTime).toLocaleDateString()}}
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <p style="font-size: 17px;">
+              <van-icon name="flag-o"></van-icon>
+              工作内容
+            </p>
+            <span style="color: #9a9da0">
+              {{currentData.positionDesc}}
+            </span>
+          </div>
+
+          <div>
+            <p style="font-size: 17px;">
+              <van-icon name="location-o"></van-icon>
+              工作地点
+            </p>
+            <span style="color: #9a9da0">
+              {{currentData.positionAddress}}
+            </span>
+          </div>
+
+          <div>
+            <p style="font-size: 17px;">
+              <van-icon name="phone-o"></van-icon>
+              机构信息
+            </p>
+            <span style="color: #9a9da0">
+              {{currentData.positionCompanyName}}<br>
+              <a :href="'tel:' + currentData.positionPhone">
+                {{currentData.positionPhone}}
+              </a>
+            </span>
+          </div>
+
+          <div>
+            <p style="color: darkorange; padding-top: 20px">
+              Tips：凡涉及到工作内容不符，收费、违法信息传播的工作，请您警惕并收集相关证据向我们举报。
+            </p>
+            <van-row>
+              <van-col span="12">
+                <van-button size="large" type="primary" plain hairline block>分享岗位</van-button>
+              </van-col>
+              <van-col span="12">
+                <van-button size="large" type="primary" block>我要报名</van-button>
+              </van-col>
+            </van-row>
+          </div>
+        </div>
       </van-popup>
     </div>
     <!-- 兼职内容 -->
@@ -95,9 +177,10 @@
     },
     methods: {
       onClickCard(item) {
+        this.currentData = item;
         this.showCurrentData = true;
+
         console.log(item);
-        // todo
       },
       onPageChange() {
         this.getData();
@@ -106,10 +189,12 @@
       getData() {
         // 获取兼职信息
         getPositionList({
+          tag: this.selectedCategory,
           page: this.currentPage - 1,
           size: this.size,
           openId: this.$store.state.userInfo.openId
         }).then(res => {
+          console.log(res);
           if (res.code === 14) {  // 如果是学生用户，没有完善简历
             // 跳转到完善简历页面
             this.$router.push({
