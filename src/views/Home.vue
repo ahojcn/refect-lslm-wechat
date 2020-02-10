@@ -2,7 +2,7 @@
   <div>
     <div style="text-align: center; padding-top: 10%">
       <div style="display: inline;">
-        <div>
+        <div class="animated flip">
           <img class="advert_avatar" @click="$toast('嗨起来！')" :src="$store.state.userInfo.userIcon">
         </div>
 
@@ -21,10 +21,10 @@
           个人信息
         </van-divider>
         <van-grid :column-num="4" :gutter="1" :border="false">
-          <van-grid-item icon="edit" text="我的简历" to="/NewUser/Resume"></van-grid-item>
-          <van-grid-item disabled icon="like-o" text="我接手的兼职"></van-grid-item>
-          <van-grid-item icon="star-o" text="我报名的活动"></van-grid-item>
-          <van-grid-item icon="award-o" text="身份认证" to="/NewUser/Index" dot></van-grid-item>
+          <van-grid-item class="animated flipInX" icon="edit" text="我的简历" to="/NewUser/Resume"></van-grid-item>
+          <van-grid-item class="animated flipInX" disabled icon="like-o" text="我接手的兼职"></van-grid-item>
+          <van-grid-item class="animated flipInX" icon="star-o" text="我报名的活动"></van-grid-item>
+          <van-grid-item class="animated flipInX" icon="award-o" text="身份认证" to="/NewUser/Index" dot></van-grid-item>
         </van-grid>
       </div>
 

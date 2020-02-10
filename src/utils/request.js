@@ -27,7 +27,7 @@ service.interceptors.response.use(
 
   err => {
     Dialog.alert({
-      message: '服务器开小差啦~'
+      message: '网络似乎出了些小问题~'
     });
 
     return err.data;

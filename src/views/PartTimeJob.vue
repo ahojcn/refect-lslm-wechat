@@ -1,9 +1,10 @@
 <template>
   <div>
     <!-- 分类下拉菜单 -->
-    <div>
+    <div class="animated fadeInDown">
       <van-dropdown-menu>
-        <van-dropdown-item @change="onCategoriesChange" v-model="selectedCategory" :options="categories"></van-dropdown-item>
+        <van-dropdown-item @change="onCategoriesChange" v-model="selectedCategory"
+                           :options="categories"></van-dropdown-item>
       </van-dropdown-menu>
     </div>
     <!-- 分类下拉菜单 -->
@@ -11,7 +12,7 @@
     <!-- 兼职内容 -->
 
     <div style="padding-top: 10px">
-      <transition-group mode="out-in">
+      <transition-group name="card" mode="out-in">
         <div v-for="(item, index) in data"
              :key="item.positionId"
              style="padding-top: 3px;transition: all 1s;display: inline-block; width: 100%">
@@ -127,10 +128,15 @@
             </p>
             <van-row>
               <van-col span="12">
-                <van-button size="large" type="primary" plain hairline block>分享岗位</van-button>
+                <!-- todo -->
+                <van-button disabled size="large" type="primary" plain hairline block>
+                  分享岗位
+                </van-button>
               </van-col>
               <van-col span="12">
-                <van-button size="large" type="primary" block>我要报名</van-button>
+                <van-button @click="onSubmit" size="large" type="primary" block>
+                  我要报名
+                </van-button>
               </van-col>
             </van-row>
           </div>
@@ -140,7 +146,7 @@
     <!-- 兼职内容 -->
 
     <!-- 分页 -->
-    <div style="bottom: 50px; position: fixed; width: 100%">
+    <div class="animated fadeInUpBig" style="padding-top: 20px">
       <van-pagination
         v-model="currentPage"
         :page-count="totalPage"
@@ -155,7 +161,7 @@
 
 <script>
   import {getPositionCategories} from "@/api/company";
-  import {getPositionList, addBrowse} from '@/api/student';
+  import {getPositionList, addBrowse, applyStudentPosition} from '@/api/student';
 
   export default {
     name: "PartTimeJob",
@@ -227,6 +233,18 @@
           }
         });
       },
+      // 报名兼职
+      onSubmit() {
+        applyStudentPosition({
+          openId: localStorage.getItem('openId'),
+          positionId: this.currentData.positionId
+        }).then(res => {
+          if (res.code === 0) {
+            this.$toast.success('报名成功');
+            this.showCurrentData = false;
+          }
+        });
+      },
     },
     mounted() {
       this.$store.commit('setActiveTabBar', 'PartTimeJob');
@@ -251,21 +269,21 @@
 
 <style scoped>
 
-  .v-enter, .v-leave-to {
+  .card-enter, .card-leave-to {
     opacity: 0;
     transform: translateY(200px);
   }
 
-  .v-enter-active, .v-leave-active {
+  .card-enter-active, .card-leave-active {
     transition: all 0.6s ease;
   }
 
   /*v-move 和 v-leave-active 配合使用，能够实现列表后续的元素，渐渐地漂上来的效果 */
-  .v-move {
+  .card-move {
     transition: all 0.6s ease;
   }
 
-  .v-leave-active {
+  .card-leave-active {
     position: absolute;
   }
 

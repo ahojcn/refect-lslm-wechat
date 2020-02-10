@@ -1,6 +1,9 @@
 <template>
   <div>
-    <transition mode="out-in">
+    <transition
+      mode="out-in"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut">
       <router-view></router-view>
     </transition>
 
