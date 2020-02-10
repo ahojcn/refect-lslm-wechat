@@ -1,6 +1,12 @@
 <template>
-  <div id="app">
-    <van-overlay :show="$store.state.show"></van-overlay>
+  <div id="app" style="padding-bottom: 30px">
+    <van-overlay :show="$store.state.loading">
+      <div style="display: flex;align-items: center;justify-content: center;height: 100%;">
+        <div>
+          <van-loading size="50px" color="#1989fa" vertical>加载中...</van-loading>
+        </div>
+      </div>
+    </van-overlay>
 
     <transition
       mode="out-in"

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {Toast, Dialog} from 'vant';
+import store from '../store';
 
 // 一个 axios 实例
 const service = axios.create({
@@ -10,11 +11,24 @@ const service = axios.create({
 });
 
 // request 拦截器
-service.interceptors.request.use();
+service.interceptors.request.use(
+  config => {
+    store.state.loading = true;
+
+    return config;
+  },
+  err => {
+    store.state.loading = false;
+
+    return err;
+  }
+);
 
 // response 拦截器
 service.interceptors.response.use(
   res => {
+    store.state.loading = false;
+
     if (res.data.code !== 0) {
       // Toast.fail(res.data.msg);
       Dialog.alert({
@@ -26,6 +40,8 @@ service.interceptors.response.use(
   },
 
   err => {
+    store.state.loading = false;
+
     Dialog.alert({
       message: '网络似乎出了些小问题~'
     });

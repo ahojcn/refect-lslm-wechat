@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 分类下拉菜单 -->
-    <div class="animated fadeInDown">
+    <div>
       <van-dropdown-menu>
         <van-dropdown-item @change="onCategoriesChange" v-model="selectedCategory"
                            :options="categories"></van-dropdown-item>
@@ -10,7 +10,6 @@
     <!-- 分类下拉菜单 -->
 
     <!-- 兼职内容 -->
-
     <div style="padding-top: 10px">
       <transition-group name="card" mode="out-in">
         <div v-for="(item, index) in data"
@@ -142,6 +141,14 @@
           </div>
         </div>
       </van-popup>
+
+      <div v-if="totalPage===0 && data.length === 0">
+        <p style="text-align: center; font-size: 20px">
+          <van-icon name="fail"></van-icon>
+          <br>
+          暂无此类兼职
+        </p>
+      </div>
     </div>
     <!-- 兼职内容 -->
 

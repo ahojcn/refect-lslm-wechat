@@ -16,34 +16,15 @@
 
     <div>
       <div>
-        <van-divider content-position="left"
-                     :style="{ color: '#ff976a', borderColor: '#ff976a'}">
-          个人信息
+        <van-divider content-position="left">
+          我的信息
         </van-divider>
         <van-grid :column-num="4" :gutter="1" :border="false">
-          <van-grid-item class="animated flipInX" icon="edit" text="我的简历" to="/NewUser/Resume"></van-grid-item>
+          <van-grid-item class="animated flipInX" icon="edit" text="我的简历" dot to="/NewUser/Resume"></van-grid-item>
           <van-grid-item class="animated flipInX" disabled icon="like-o" text="我接手的兼职"></van-grid-item>
           <van-grid-item class="animated flipInX" icon="star-o" text="我报名的活动"></van-grid-item>
-          <van-grid-item class="animated flipInX" icon="award-o" text="身份认证" to="/NewUser/Index" dot></van-grid-item>
+          <van-grid-item class="animated flipInX" icon="award-o" text="身份认证" to="/NewUser/Index"></van-grid-item>
         </van-grid>
-      </div>
-
-      <div>
-        <van-divider content-position="left"
-                     :style="{ color: '#1989fa', borderColor: '#1989fa'}">
-          品牌活动
-        </van-divider>
-        <van-cell title="URL 跳转" is-link></van-cell>
-        <van-cell title="路由跳转" is-link></van-cell>
-      </div>
-
-      <div>
-        <van-divider content-position="left"
-                     :style="{ color: '#07c160', borderColor: '#07c160'}">
-          兼职广场
-        </van-divider>
-        <van-cell title="URL 跳转" is-link></van-cell>
-        <van-cell title="路由跳转" is-link></van-cell>
       </div>
     </div>
 
