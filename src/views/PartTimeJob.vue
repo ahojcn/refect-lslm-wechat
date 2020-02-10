@@ -3,7 +3,7 @@
     <!-- 分类下拉菜单 -->
     <div>
       <van-dropdown-menu>
-        <van-dropdown-item v-model="selectedCategory" :options="categories"></van-dropdown-item>
+        <van-dropdown-item @change="onCategoriesChange" v-model="selectedCategory" :options="categories"></van-dropdown-item>
       </van-dropdown-menu>
     </div>
     <!-- 分类下拉菜单 -->
@@ -155,7 +155,7 @@
 
 <script>
   import {getPositionCategories} from "@/api/company";
-  import {getPositionList} from '@/api/student';
+  import {getPositionList, addBrowse} from '@/api/student';
 
   export default {
     name: "PartTimeJob",
@@ -176,12 +176,27 @@
       }
     },
     methods: {
+      // 当点击 card
       onClickCard(item) {
         this.currentData = item;
         this.showCurrentData = true;
 
-        console.log(item);
+        addBrowse({
+          positionId: item.positionId
+        }).then(res => {
+          // pass
+          if (res.code === 0) {
+            this.currentData.positionBrowse += 1;
+          }
+        }).catch(err => {
+          // pass
+        });
       },
+      // 当类别下拉菜单选项改变
+      onCategoriesChange(val) {
+        this.getData();
+      },
+      // 当分页发生改变
       onPageChange() {
         this.getData();
       },

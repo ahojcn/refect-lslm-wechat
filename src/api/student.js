@@ -26,3 +26,12 @@ export function applyStudentPosition(data) {
     data
   })
 }
+
+// 浏览兼职
+export function addBrowse(data) {
+  return request({
+    url: 'student/position/add-browse',
+    method: 'post',
+    data
+  })
+}
