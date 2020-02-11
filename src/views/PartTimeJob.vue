@@ -56,7 +56,7 @@
         closeable
         round
         position="bottom"
-        :style="{ height: '90%' }">
+        :style="{ maxHeight: '90%', minHeight: '50%' }">
         <div style="padding: 20px;">
           <div>
             <span style="font-weight: 700; font-size: 20px;">
@@ -73,21 +73,23 @@
               <van-tag size="large" mark type="danger">
                 {{currentData.positionMoney}}
               </van-tag>
+
+              <span style="float: right; color: #9a9da0">
+                {{currentData.positionBrowse}}次浏览
+              </span>
             </div>
 
             <div style="padding-top: 10px; color: #9a9da0">
               <span v-for="c in currentData.categoryList" :key="c.categoryId">
-                {{c.categoryName}} |
+                {{c.categoryName}}
               </span>
-              <span>
-                {{currentData.positionBrowse}}次浏览
-              </span>
-              <span style="float: right">
+              <p style="text-align: center">
                 {{new Date(currentData.createTime).toLocaleDateString()}}
-              </span>
+              </p>
             </div>
           </div>
 
+          <!-- 工作内容 -->
           <div>
             <p style="font-size: 17px;">
               <van-icon name="flag-o"></van-icon>
@@ -98,6 +100,7 @@
             </span>
           </div>
 
+          <!-- 工作地点 -->
           <div>
             <p style="font-size: 17px;">
               <van-icon name="location-o"></van-icon>
@@ -108,23 +111,24 @@
             </span>
           </div>
 
+          <!-- 机构信息 -->
           <div>
             <p style="font-size: 17px;">
               <van-icon name="phone-o"></van-icon>
               机构信息
             </p>
             <span style="color: #9a9da0">
-              {{currentData.positionCompanyName}}<br>
-              <a :href="'tel:' + currentData.positionPhone">
-                {{currentData.positionPhone}}
-              </a>
+              {{currentData.positionCompanyName}}
+              <van-button round size="small">
+                <a style="color: #000000" :href="'tel:' + currentData.positionPhone">
+                  <van-icon name="service"></van-icon>咨询
+                </a>
+              </van-button>
             </span>
           </div>
 
-          <div>
-            <p style="color: darkorange; padding-top: 20px">
-              Tips：凡涉及到工作内容不符，收费、违法信息传播的工作，请您警惕并收集相关证据向我们举报。
-            </p>
+          <!-- 报名 / 分享按钮 -->
+          <div style="padding-top: 40px">
             <van-row>
               <van-col span="12">
                 <!-- todo -->
@@ -138,6 +142,9 @@
                 </van-button>
               </van-col>
             </van-row>
+            <p style="color: darkorange;">
+              Tips：凡涉及到工作内容不符，收费、违法信息传播的工作，请您警惕并收集相关证据向我们举报。
+            </p>
           </div>
         </div>
       </van-popup>

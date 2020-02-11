@@ -15,7 +15,7 @@ let store = new Vuex.Store({
 
     activeTabBar: 'home',
 
-    loading: false,
+    loading: true,
   },
   getters: {},
   mutations: {

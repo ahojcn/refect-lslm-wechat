@@ -26,23 +26,12 @@ export default new Router({
       component: Index,
       redirect: '/PartTimeJob',
       children: [
-        {
-          path: '/PartTimeJob',
-          name: 'PartTimeJob',
-          component: PartTimeJob,
-        },
-        {
-          path: '/Home',
-          name: 'Home',
-          component: Home
-        },
+        {path: '/PartTimeJob', name: 'PartTimeJob', component: PartTimeJob,},
+        {path: '/Home', name: 'Home', component: Home,},
       ]
     },
     {
-      path: '/NewUser',
-      name: 'NewUser',
-      component: NewUser,
-      redirect: '/NewUser/Index',
+      path: '/NewUser', name: 'NewUser', component: NewUser, redirect: '/NewUser/Index',
       children: [
         {
           path: '/NewUser/Index',
