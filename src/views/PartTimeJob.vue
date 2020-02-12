@@ -119,11 +119,9 @@
             </p>
             <span style="color: #9a9da0">
               {{currentData.positionCompanyName}}
-              <van-button round size="small">
-                <a style="color: #000000" :href="'tel:' + currentData.positionPhone">
-                  <van-icon name="service"></van-icon>咨询
-                </a>
-              </van-button>
+              <a style="color: #000000" :href="'tel:' + currentData.positionPhone">
+                <van-icon name="service"></van-icon>咨询
+              </a>
             </span>
           </div>
 

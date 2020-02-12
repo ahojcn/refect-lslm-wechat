@@ -5,9 +5,10 @@
         <div class="animated flip">
           <img class="advert_avatar" @click="$toast('嗨起来！')" :src="$store.state.userInfo.userIcon">
         </div>
-
+        <span style="font-weight: 700">
+          {{$store.state.userInfo.userName}}
+        </span>
         <br>
-
         <van-tag v-if="Object.keys($store.state.studentInfo).length !== 0" type="primary">学生用户</van-tag>
         <van-tag v-if="Object.keys($store.state.companyInfo).length !== 0" type="success">企业用户</van-tag>
         <van-tag v-if="Object.keys($store.state.clubInfo).length !== 0" type="warning">学生社团用户</van-tag>
@@ -16,9 +17,6 @@
 
     <div>
       <div>
-        <van-divider content-position="left">
-          我的信息
-        </van-divider>
         <van-grid :column-num="4" :gutter="1" :border="false">
           <van-grid-item class="animated flipInX" icon="edit" text="我的简历" dot to="/NewUser/Resume"></van-grid-item>
           <van-grid-item class="animated flipInX" disabled icon="like-o" text="我接手的兼职"></van-grid-item>
@@ -26,6 +24,13 @@
           <van-grid-item class="animated flipInX" icon="award-o" text="身份认证" to="/NewUser/Index"></van-grid-item>
         </van-grid>
       </div>
+
+      <van-cell-group title="分组1">
+        <van-cell title="单元格" value="内容"></van-cell>
+      </van-cell-group>
+      <van-cell-group title="认证">
+        <van-cell icon="user-circle-o" title="学生认证" is-link></van-cell>
+      </van-cell-group>
     </div>
 
   </div>
@@ -48,10 +53,9 @@
   /* advert_avatar */
   .advert_avatar {
     border: 3px solid #eee;
-    width: 100px;
-    height: 100px;
+    border-radius: 50%;
     padding: 0;
-    border-radius: 20%;
+    width: 20%;
     animation: advert_nav-m 20s linear infinite;
     -moz-animation: advert_nav-m 20s linear infinite;
     /* Firefox */
