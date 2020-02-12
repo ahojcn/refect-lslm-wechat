@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div id="qrCode" ref="qrCodeDiv"></div>
+
     <div style="text-align: center; padding-top: 10%">
       <div style="display: inline;">
         <div class="animated flip">
@@ -36,16 +38,35 @@
 </template>
 
 <script>
+  import QRCode from 'qrcodejs2';
+
   export default {
     name: "Home",
     data() {
-      return {
-      }
+      return {}
     },
     methods: {
+      bindQRCode: function () {
+        // let j = {a: 1, b: 2, c: 3};
+        // let data = encodeURIComponent(JSON.stringify(j));
+        // console.log(JSON.parse(decodeURIComponent(data)));
+
+        new QRCode(this.$refs.qrCodeDiv, {
+          text: 'https://www.baidu.com',
+          width: 200,
+          height: 200,
+          colorDark: "#333333", //二维码颜色
+          colorLight: "#ffffff", //二维码背景色
+          correctLevel: QRCode.CorrectLevel.L //容错率，L/M/H
+        })
+      }
     },
     mounted() {
       this.$store.commit('setActiveTabBar', 'Home');
+
+      this.$nextTick(function () {
+        this.bindQRCode();
+      });
     },
   }
 </script>
