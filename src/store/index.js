@@ -16,6 +16,8 @@ let store = new Vuex.Store({
     activeTabBar: 'home',
 
     loading: true,
+
+    verifyCodeOk: false,  // 验证码输入正确后会变为 true
   },
   getters: {},
   mutations: {

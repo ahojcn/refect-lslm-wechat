@@ -181,8 +181,6 @@
       },
     },
     mounted() {
-      console.log(this.$store.state);
-
       if (this.$store.state.userInfo.userPhone === '') {
         this.$toast('请先绑定手机');
         this.$router.push({

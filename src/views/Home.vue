@@ -32,7 +32,6 @@
         <van-cell icon="user-circle-o" title="学生认证" is-link></van-cell>
       </van-cell-group>
     </div>
-
   </div>
 </template>
 
@@ -40,9 +39,11 @@
   export default {
     name: "Home",
     data() {
-      return {}
+      return {
+      }
     },
-    methods: {},
+    methods: {
+    },
     mounted() {
       this.$store.commit('setActiveTabBar', 'Home');
     },
