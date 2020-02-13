@@ -130,7 +130,7 @@
             <van-row>
               <van-col span="12">
                 <!-- todo -->
-                <van-button disabled size="large" type="primary" plain hairline block>
+                <van-button @click="onClickShareJob" size="large" type="primary" plain hairline block>
                   分享岗位
                 </van-button>
               </van-col>
@@ -256,6 +256,10 @@
             this.showCurrentData = false;
           }
         });
+      },
+      // 当点击分享按钮
+      onClickShareJob() {
+        this.$toast('开发中\n敬请期待')
       },
     },
     mounted() {

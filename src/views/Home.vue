@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="qrCode" ref="qrCodeDiv"></div>
+    <!--    <div id="qrCode" ref="qrCodeDiv"></div>-->
 
     <div style="text-align: center; padding-top: 10%">
       <div style="display: inline;">
@@ -18,18 +18,45 @@
     </div>
 
     <div>
-      <div>
-        <van-grid :column-num="4" :gutter="1" :border="false">
-          <van-grid-item class="animated flipInX" icon="edit" text="我的简历" dot to="/NewUser/Resume"></van-grid-item>
-          <van-grid-item class="animated flipInX" disabled icon="like-o" text="我接手的兼职"></van-grid-item>
-          <van-grid-item class="animated flipInX" icon="star-o" text="我报名的活动"></van-grid-item>
-          <van-grid-item class="animated flipInX" icon="award-o" text="身份认证" to="/NewUser/Index"></van-grid-item>
-        </van-grid>
-      </div>
+      <!--      <div>-->
+      <!--        <van-grid :column-num="4" :gutter="1" :border="false">-->
+      <!--          <van-grid-item class="animated flipInX" icon="edit" text="我的简历" dot to="/NewUser/Resume"></van-grid-item>-->
+      <!--          <van-grid-item class="animated flipInX" disabled icon="like-o" text="我接手的兼职"></van-grid-item>-->
+      <!--          <van-grid-item class="animated flipInX" icon="star-o" text="我报名的活动"></van-grid-item>-->
+      <!--          <van-grid-item class="animated flipInX" icon="award-o" text="身份认证" to="/NewUser/Index"></van-grid-item>-->
+      <!--        </van-grid>-->
+      <!--      </div>-->
 
-      <van-cell-group title="分组1">
-        <van-cell title="单元格" value="内容"></van-cell>
+      <van-cell-group title="我的">
+        <!-- 学生 -->
+        <div v-if="Object.keys($store.state.studentInfo).length !== 0">
+          <!--          <van-cell title="我的简历" value="完善简历" is-link to="/NewUser/Resume"></van-cell>-->
+
+          <van-collapse v-model="activeNames">
+            <van-collapse-item title="我的简历" name="1">
+              <van-grid :column-num="4" :border="false">
+                <van-grid-item class="animated flipInX" icon="edit" text="我的简历" dot
+                               to="/NewUser/Resume"></van-grid-item>
+                <van-grid-item class="animated flipInX" disabled icon="like-o" text="我接手的兼职"></van-grid-item>
+                <van-grid-item class="animated flipInX" icon="star-o" text="我报名的活动"></van-grid-item>
+                <van-grid-item class="animated flipInX" icon="award-o" text="身份认证"
+                               to="/NewUser/Index"></van-grid-item>
+              </van-grid>
+            </van-collapse-item>
+            <van-collapse-item title="标题2" name="2">内容</van-collapse-item>
+            <van-collapse-item title="标题3" name="3" disabled>内容</van-collapse-item>
+          </van-collapse>
+        </div>
+        <!-- 企业 -->
+        <div v-if="Object.keys($store.state.companyInfo).length !== 0">
+          <van-cell title="单元格" value="内容"></van-cell>
+        </div>
+        <!-- 社团 -->
+        <div v-if="Object.keys($store.state.clubInfo).length !== 0">
+          <van-cell title="单元格" value="内容"></van-cell>
+        </div>
       </van-cell-group>
+
       <van-cell-group title="认证">
         <van-cell icon="user-circle-o" title="学生认证" is-link></van-cell>
       </van-cell-group>
@@ -38,12 +65,14 @@
 </template>
 
 <script>
-  import QRCode from 'qrcodejs2';
+  // import QRCode from 'qrcodejs2';
 
   export default {
     name: "Home",
     data() {
-      return {}
+      return {
+        activeNames: ['1'],
+      }
     },
     methods: {
       bindQRCode: function () {
@@ -51,22 +80,22 @@
         // let data = encodeURIComponent(JSON.stringify(j));
         // console.log(JSON.parse(decodeURIComponent(data)));
 
-        new QRCode(this.$refs.qrCodeDiv, {
-          text: 'https://www.baidu.com',
-          width: 200,
-          height: 200,
-          colorDark: "#333333", //二维码颜色
-          colorLight: "#ffffff", //二维码背景色
-          correctLevel: QRCode.CorrectLevel.L //容错率，L/M/H
-        })
+        // new QRCode(this.$refs.qrCodeDiv, {
+        //   text: 'https://www.baidu.com',
+        //   width: 200,
+        //   height: 200,
+        //   colorDark: "#333333", //二维码颜色
+        //   colorLight: "#ffffff", //二维码背景色
+        //   correctLevel: QRCode.CorrectLevel.L //容错率，L/M/H
+        // })
       }
     },
     mounted() {
       this.$store.commit('setActiveTabBar', 'Home');
 
-      this.$nextTick(function () {
-        this.bindQRCode();
-      });
+      // this.$nextTick(function () {
+      //   this.bindQRCode();
+      // });
     },
   }
 </script>
