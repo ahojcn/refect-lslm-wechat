@@ -74,7 +74,7 @@
 
 <script>
   import {getPositionCategories} from "@/api/company";
-  import {uploadStudentResume} from "@/api/student";
+  import {uploadStudentResume, downloadResume} from "@/api/student";
 
   export default {
     name: "Resume",
@@ -123,19 +123,19 @@
       },
 
       onSubmit() {
-        if (this.resumeName === ''
-          || this.resumeSex === ''
-          || this.resumeAge === ''
-          || this.resumeEducationStr === ''
-          || this.resumeHistory === ''
-          || this.resumeAddress === ''
-          || this.resumeWork === ''
-          || this.resumeWorkCategoryStr === ''
-          || this.resumeHopeMoney === ''
-          || this.resumeLanguage === ''
-          || this.resumeCredential === ''
-          || this.resumeAboutMyself === '') {
-          this.$toast.fail('请完善简历~');
+        if ((this.resumeName === '' || this.resumeName === undefined)
+          || (this.resumeSex === '' || this.resumeSex === undefined)
+          || (this.resumeAge === '' || this.resumeAge === undefined)
+          || (this.resumeEducationStr === '' || this.resumeEducationStr === undefined)
+          || (this.resumeHistory === '' || this.resumeHistory === undefined)
+          || (this.resumeAddress === '' || this.resumeAddress === undefined)
+          || (this.resumeWork === '' || this.resumeWork === undefined)
+          || (this.resumeWorkCategoryStr === '' || this.resumeWorkCategoryStr === undefined)
+          || (this.resumeHopeMoney === '' || this.resumeHopeMoney === undefined)
+          || (this.resumeLanguage === '' || this.resumeLanguage === undefined)
+          || (this.resumeCredential === '' || this.resumeCredential === undefined)
+          || (this.resumeAboutMyself === '' || this.resumeAboutMyself === undefined)) {
+          this.$toast.fail('请完善简历');
           return;
         }
 
@@ -190,6 +190,27 @@
         });
 
       },
+
+      // 获取学生简历
+      getUserResume() {
+        downloadResume({
+          openId: this.$store.state.userInfo.openId
+        }).then(res => {
+          console.log(res);
+          this.resumeName = res.data.resumeName;
+          this.resumeSex = res.data.resumeSex;
+          this.resumeAge = res.data.resumeAge;
+          this.resumeEducationStr = res.data.resumeEducationStr;
+          this.resumeHistory = res.data.resumeHistory;
+          this.resumeAddress = res.data.resumeAddress;
+          this.resumeWork = res.data.resumeWork;
+          this.resumeWorkCategoryStr = res.data.resumeWorkCategoryStr;
+          this.resumeHopeMoney = res.data.resumeHopeMoney;
+          this.resumeLanguage = res.data.resumeLanguage;
+          this.resumeCredential = res.data.resumeCredential;
+          this.resumeAboutMyself = res.data.resumeAboutMyself;
+        });
+      },
     },
     mounted() {
       getPositionCategories().then(res => {
@@ -201,6 +222,8 @@
         });
         this.workCategoryPickerLoading = false;
       });
+
+      this.getUserResume();
     },
   }
 </script>

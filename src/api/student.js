@@ -9,6 +9,15 @@ export function uploadStudentResume(data) {
   })
 }
 
+// 获取学生简历
+export function downloadResume(data) {
+  return request({
+    url: 'student/resume/download',
+    method: 'post',
+    data
+  })
+}
+
 // 学生获取兼职列表
 export function getPositionList(data) {
   return request({
