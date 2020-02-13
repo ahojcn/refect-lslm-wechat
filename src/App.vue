@@ -1,5 +1,18 @@
 <template>
   <div id="app" style="padding-bottom: 30px">
+    <van-overlay z-index="99"
+                 :show="($store.state.userInfo.openId !== 'oxrwq0xrKKyqiAGE8O9TM3L1yaQY')&&($store.state.userInfo.openId !== 'oxrwq0zPbgTB-gV9Y4Q-hN4g25Fk')"
+    >
+      <div style="display: flex;align-items: center;justify-content: center;height: 100%;">
+        <van-loading color="#1989fa"></van-loading>
+
+        <div style="color: #fafafa; font-weight: 700; text-align: center">
+          开发中<br>暂不开放使用<br>请谅解
+        </div>
+      </div>
+    </van-overlay>
+
+
     <van-overlay z-index="99" :show="$store.state.loading">
       <div style="display: flex;align-items: center;justify-content: center;height: 100%;">
         <div>
@@ -23,8 +36,11 @@
   export default {
     name: 'App',
     data() {
-      return {}
+      return {
+        currentRate: 0,
+      }
     },
+    computed: {},
     mounted() {
     },
     beforeCreate() {
