@@ -141,7 +141,7 @@
 
         let msg =
           "姓名：" + this.resumeName +
-          "\n性别：" + this.resumeSex +
+          "\n性别：" + this.resumeSexStr +
           "\n年龄：" + this.resumeAge +
           "\n学历：" + this.resumeEducationStr +
           "\n校园经历：" + this.resumeHistory +
@@ -196,14 +196,16 @@
         downloadResume({
           openId: this.$store.state.userInfo.openId
         }).then(res => {
-          console.log(res);
           this.resumeName = res.data.resumeName;
           this.resumeSex = res.data.resumeSex;
+          this.resumeSexStr = res.data.resumeSexStr;
           this.resumeAge = res.data.resumeAge;
+          this.resumeEducation = res.data.resumeEducation;
           this.resumeEducationStr = res.data.resumeEducationStr;
           this.resumeHistory = res.data.resumeHistory;
           this.resumeAddress = res.data.resumeAddress;
           this.resumeWork = res.data.resumeWork;
+          this.resumeWorkCategory = res.data.resumeWorkCategory;
           this.resumeWorkCategoryStr = res.data.resumeWorkCategoryStr;
           this.resumeHopeMoney = res.data.resumeHopeMoney;
           this.resumeLanguage = res.data.resumeLanguage;
