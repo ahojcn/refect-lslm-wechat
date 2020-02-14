@@ -31,9 +31,9 @@ service.interceptors.response.use(
 
     if (res.data.code !== 0) {
       // Toast.fail(res.data.msg);
-      // Dialog.alert({
-      //   message: res.data.msg
-      // });
+      Dialog.alert({
+        message: res.data.msg
+      });
     }
 
     return res.data;
@@ -42,9 +42,9 @@ service.interceptors.response.use(
   err => {
     store.state.loading = false;
 
-    // Dialog.alert({
-    //   message: '网络似乎出了些小问题~'
-    // });
+    Dialog.alert({
+      message: '网络似乎出了些小问题~'
+    });
 
     return err.data;
   }

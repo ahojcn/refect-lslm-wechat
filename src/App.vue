@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="padding-bottom: 30px">
     <van-overlay z-index="99"
-                 :show="($store.state.userInfo.openId === 'oxrwq0xrKKyqiAGE8O9TM3L1yaQY') || ($store.state.userInfo.openId === undefined)"
+                 :show="($store.state.userInfo.openId !== 'oxrwq0xrKKyqiAGE8O9TM3L1yaQY') || ($store.state.userInfo.openId === undefined)"
     >
       <div style="display: flex;align-items: center;justify-content: center;height: 100%;">
         <div style="font-weight: 700; text-align: center; color: #fafafa">
