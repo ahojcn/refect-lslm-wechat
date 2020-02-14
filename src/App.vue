@@ -1,13 +1,46 @@
 <template>
   <div id="app" style="padding-bottom: 30px">
     <van-overlay z-index="99"
-                 :show="($store.state.userInfo.openId !== 'oxrwq0xrKKyqiAGE8O9TM3L1yaQY')&&($store.state.userInfo.openId !== 'oxrwq0zPbgTB-gV9Y4Q-hN4g25Fk')"
+                 :show="($store.state.userInfo.openId === 'oxrwq0xrKKyqiAGE8O9TM3L1yaQY') || ($store.state.userInfo.openId === undefined)"
     >
       <div style="display: flex;align-items: center;justify-content: center;height: 100%;">
-        <van-loading color="#1989fa"></van-loading>
+        <div style="font-weight: 700; text-align: center; color: #fafafa">
+          {{hopeData[0].date}}
+          <hr>
+          今日疫情
 
-        <div style="color: #fafafa; font-weight: 700; text-align: center">
-          开发中<br>暂不开放使用<br>请谅解
+          <table align="center">
+            <tr style="color: #ee0a24">
+              <td>确诊：</td>
+              <td>{{hopeData[0].diagnosed}}</td>
+            </tr>
+            <tr style="color: orange">
+              <td>疑似：</td>
+              <td>{{hopeData[0].suspect}}</td>
+            </tr>
+            <tr style="color: #9a9da0">
+              <td>死亡：</td>
+              <td>{{hopeData[0].death}}</td>
+            </tr>
+            <tr style="color: lightgreen">
+              <td>治愈：</td>
+              <td>{{hopeData[0].cured}}</td>
+            </tr>
+          </table>
+          <hr>
+
+          最新消息<br>
+          <span style="font-weight: 400;">
+            {{news[0].pubDateStr}}，{{news[0].title}}<br>
+            （{{news[0].provinceName}}，{{news[0].infoSource}}）<hr>
+          </span>
+        </div>
+
+        <div style="position: fixed; bottom: 20px; text-align: center">
+          <van-loading color="#1989fa"></van-loading>
+          <span style="color: #fafafa">
+            开发中<br>暂不开放使用<br>请谅解
+          </span>
         </div>
       </div>
     </van-overlay>
@@ -31,17 +64,49 @@
 </template>
 
 <script>
-  import {getUserInfo} from '@/api/basic-info';
+  import axios from 'axios';
 
   export default {
     name: 'App',
     data() {
       return {
         currentRate: 0,
+
+        hopeData: [],  // 疫情数据
+        news: [],
       }
     },
-    computed: {},
+    computed: {
+      d: function () {
+        let d;
+
+        axios.get('http://www.dzyong.top:3005/yiqing/total').then(res => {
+          d = res.data.data;
+        }).catch(err => {
+          this.$toast('获取疫情数据失败\n网络错误');
+        });
+
+        return d;
+      }
+    },
     mounted() {
+      this.$nextTick(function () {
+        // 获取统计数据
+        axios.get('http://www.dzyong.top:3005/yiqing/total').then(res => {
+          this.hopeData = res.data.data;
+        }).catch(err => {
+          this.$toast('获取疫情数据失败\n网络错误');
+        });
+
+        // 获取最新消息
+        axios.get('http://www.dzyong.top:3005/yiqing/news').then(res => {
+          this.news = res.data.data;
+          console.log(this.news)
+        }).catch(err => {
+          this.$toast('获取疫情数据失败\n网络错误');
+        });
+      });
+
     },
     beforeCreate() {
       localStorage.setItem('openId', this.$route.query["openId"]);

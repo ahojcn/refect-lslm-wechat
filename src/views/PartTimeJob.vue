@@ -227,7 +227,6 @@
           size: this.size,
           openId: this.$store.state.userInfo.openId
         }).then(res => {
-          console.log(res);
           if (res.code === 14) {  // 如果是学生用户，没有完善简历
             // 跳转到完善简历页面
             this.$router.push({
@@ -241,7 +240,6 @@
             this.totalPage = res.data.totalPage;
             this.size = res.data.size;
             this.data = res.data.data;
-            console.log(res.data);
           }
         });
       },
