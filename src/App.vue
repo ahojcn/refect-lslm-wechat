@@ -90,21 +90,20 @@
       }
     },
     mounted() {
-      this.$nextTick(function () {
-        // 获取统计数据
-        axios.get('http://www.dzyong.top:3005/yiqing/total').then(res => {
-          this.hopeData = res.data.data;
-        }).catch(err => {
-          this.$toast('获取疫情数据失败\n网络错误');
-        });
 
-        // 获取最新消息
-        axios.get('http://www.dzyong.top:3005/yiqing/news').then(res => {
-          this.news = res.data.data;
-          console.log(this.news)
-        }).catch(err => {
-          this.$toast('获取疫情数据失败\n网络错误');
-        });
+      // 获取统计数据
+      axios.get('http://www.dzyong.top:3005/yiqing/total').then(res => {
+        this.hopeData = res.data.data;
+      }).catch(err => {
+        this.$toast('获取疫情数据失败\n网络错误');
+      });
+
+      // 获取最新消息
+      axios.get('http://www.dzyong.top:3005/yiqing/news').then(res => {
+        this.news = res.data.data;
+        console.log(this.news)
+      }).catch(err => {
+        this.$toast('获取疫情数据失败\n网络错误');
       });
 
     },
