@@ -19,3 +19,15 @@ export function uploadFile(file, callback) {
     onUploadProgress: callback,
   })
 }
+
+/**
+ * 获取新冠病毒总数
+ */
+import axios from 'axios';
+export function getVirTotal() {
+  return axios.get('http://www.dzyong.top:3005/yiqing/total');
+}
+
+export function getVirNews() {
+  return axios.get('http://www.dzyong.top:3005/yiqing/news');
+}

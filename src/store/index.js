@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 import {getUserInfo} from '@/api/basic-info';
+import {getServiceLicense} from '@/api/total';
 
 let store = new Vuex.Store({
   state: {
@@ -18,6 +19,8 @@ let store = new Vuex.Store({
     loading: true,
 
     verifyCodeOk: false,  // 验证码输入正确后会变为 true
+
+    serviceLicense: "",  // 用户服务协议
   },
   getters: {},
   mutations: {
@@ -41,6 +44,12 @@ let store = new Vuex.Store({
         localStorage.setItem('openId', res.userInfo.openId);
 
         return res;
+      });
+    },
+    // 获取用户协议
+    getServiceLicense(store) {
+      getServiceLicense().then(res => {
+        store.serviceLicense = res.data
       });
     },
   },

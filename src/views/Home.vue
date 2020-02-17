@@ -18,34 +18,10 @@
     </div>
 
     <div>
-      <!--      <div>-->
-      <!--        <van-grid :column-num="4" :gutter="1" :border="false">-->
-      <!--          <van-grid-item class="animated flipInX" icon="edit" text="我的简历" dot to="/NewUser/Resume"></van-grid-item>-->
-      <!--          <van-grid-item class="animated flipInX" disabled icon="like-o" text="我接手的兼职"></van-grid-item>-->
-      <!--          <van-grid-item class="animated flipInX" icon="star-o" text="我报名的活动"></van-grid-item>-->
-      <!--          <van-grid-item class="animated flipInX" icon="award-o" text="身份认证" to="/NewUser/Index"></van-grid-item>-->
-      <!--        </van-grid>-->
-      <!--      </div>-->
-
       <van-cell-group title="我的">
         <!-- 学生 -->
         <div v-if="Object.keys($store.state.studentInfo).length !== 0">
           <van-cell title="我的简历" icon="edit" value="点击修改" is-link to="/NewUser/Resume"></van-cell>
-
-          <!--          <van-collapse v-model="activeNames">-->
-          <!--            <van-collapse-item title="我的简历" name="1">-->
-          <!--              <van-grid :column-num="1" :border="false">-->
-          <!--                <van-grid-item class="animated flipInX" icon="edit" text="我的简历" dot-->
-          <!--                               to="/NewUser/Resume"></van-grid-item>-->
-          <!--                <van-grid-item class="animated flipInX" disabled icon="like-o" text="我接手的兼职"></van-grid-item>-->
-          <!--                <van-grid-item class="animated flipInX" icon="star-o" text="我报名的活动"></van-grid-item>-->
-          <!--                <van-grid-item class="animated flipInX" icon="award-o" text="身份认证"-->
-          <!--                               to="/NewUser/Index"></van-grid-item>-->
-          <!--              </van-grid>-->
-          <!--            </van-collapse-item>-->
-          <!--            <van-collapse-item title="标题2" name="2">内容</van-collapse-item>-->
-          <!--            <van-collapse-item title="标题3" name="3" disabled>内容</van-collapse-item>-->
-          <!--          </van-collapse>-->
         </div>
 
         <!-- 企业 -->

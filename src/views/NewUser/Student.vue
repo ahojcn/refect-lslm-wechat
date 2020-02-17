@@ -13,13 +13,17 @@
     </div>
 
     <van-cell-group>
-      <van-field :disabled="editable" placeholder="请输入姓名" maxlength="30" v-model="studentInfo.name" label="姓名"></van-field>
-      <van-field :disabled="editable" placeholder="请输入学校" maxlength="30" v-model="studentInfo.school" label="学校"></van-field>
-      <van-field :disabled="editable" placeholder="请输入学号" maxlength="30" v-model="studentInfo.number" label="学号"></van-field>
+      <van-field :disabled="editable" placeholder="请输入姓名" maxlength="30" v-model="studentInfo.name"
+                 label="姓名"></van-field>
+      <van-field :disabled="editable" placeholder="请输入学校" maxlength="30" v-model="studentInfo.school"
+                 label="学校"></van-field>
+      <van-field :disabled="editable" placeholder="请输入学号" maxlength="30" v-model="studentInfo.number"
+                 label="学号"></van-field>
 
       <van-cell center title="学生证正面照">
         <template slot="default">
-          <van-image v-if="editable" width="100" height="100" :src="$store.state.studentInfo.studentCertificate"></van-image>
+          <van-image v-if="editable" width="100" height="100"
+                     :src="$store.state.studentInfo.studentCertificate"></van-image>
           <van-uploader v-if="!editable" v-model="fileList" :max-count="1" :after-read="afterRead"></van-uploader>
         </template>
       </van-cell>
@@ -27,19 +31,22 @@
                     :percentage="uploadRate"></van-progress>
     </van-cell-group>
 
-    <br>
-    <van-row gutter="5">
-      <van-col span="4"></van-col>
-      <van-col span="2">
-        <van-button icon="arrow-left" size="large" type="warning" block to="/NewUser/Index"></van-button>
-      </van-col>
-      <van-col span="14">
-        <van-button @click="onSubmit" icon="success" size="large" type="primary" block>
-          提交
-        </van-button>
-      </van-col>
-      <van-col span="4"></van-col>
-    </van-row>
+    <service-license></service-license>
+
+    <div style="padding-top: 20px">
+      <van-row gutter="5">
+        <van-col span="4"></van-col>
+        <van-col span="2">
+          <van-button icon="arrow-left" size="large" type="warning" block to="/NewUser/Index"></van-button>
+        </van-col>
+        <van-col span="14">
+          <van-button @click="onSubmit" icon="success" size="large" type="primary" block>
+            提交
+          </van-button>
+        </van-col>
+        <van-col span="4"></van-col>
+      </van-row>
+    </div>
   </div>
 </template>
 
@@ -47,9 +54,11 @@
   import {uploadFile} from '@/api/utils';
   import {approveStudent} from '@/api/approve';
   import {sendVerifyKey} from '@/api/basic-info';
+  import ServiceLicense from "../../components/ServiceLicense";
 
   export default {
     name: "Student",
+    components: {ServiceLicense},
     data() {
       return {
         studentInfo: {
