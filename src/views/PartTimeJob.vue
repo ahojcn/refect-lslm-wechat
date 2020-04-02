@@ -160,7 +160,7 @@
     <!-- 发布兼职按钮 只有企业用户才显示 -->
     <div v-if="Object.keys($store.state.companyInfo).length !== 0"
          style="position: fixed; bottom: 10%; padding-left: 75%">
-      <van-button type="primary" color="#33CCFF" icon="plus" round>
+      <van-button type="primary" color="#33CCFF" icon="plus" round to="/PartTimeJob/Create">
         发布
       </van-button>
     </div>

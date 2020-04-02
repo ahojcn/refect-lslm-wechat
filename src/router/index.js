@@ -12,6 +12,7 @@ import NewUserClub from '../views/NewUser/Club';
 import NewUserResume from '../views/NewUser/Resume';
 
 import PartTimeJob from '../views/PartTimeJob';
+import PartTimeJobCreate from '../views/PartTimeJob/Create';
 
 import Home from '../views/Home';
 
@@ -26,8 +27,11 @@ export default new Router({
       component: Index,
       redirect: '/PartTimeJob',
       children: [
-        {path: '/PartTimeJob', name: 'PartTimeJob', component: PartTimeJob,},
+        {
+          path: '/PartTimeJob', name: 'PartTimeJob', component: PartTimeJob,
+        },
         {path: '/Home', name: 'Home', component: Home,},
+        {path: '/PartTimeJob/Create', name: 'PartTimeJobCreate', component: PartTimeJobCreate},
         {
           path: '/NewUser', name: 'NewUser', component: NewUser, redirect: '/NewUser/Index',
           children: [

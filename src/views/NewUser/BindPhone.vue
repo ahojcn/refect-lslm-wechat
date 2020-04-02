@@ -1,5 +1,9 @@
 <template>
   <div>
+    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa'}">
+      绑定手机号
+    </van-divider>
+
     <van-field v-model="userPhone" @input="verifyKey = ''"
                placeholder="请输入手机号"
                type="tel" label="手机号">
@@ -21,15 +25,10 @@
     </van-field>
 
     <br>
-    <van-row gutter="5">
-      <van-col span="4"></van-col>
-      <van-col span="16">
-        <van-button @click="onSubmit" icon="success" size="large" type="primary" block>
-          绑定
-        </van-button>
-      </van-col>
-      <van-col span="4"></van-col>
-    </van-row>
+
+    <van-button @click="onSubmit" icon="success" type="primary" block>
+      绑定
+    </van-button>
   </div>
 </template>
 
