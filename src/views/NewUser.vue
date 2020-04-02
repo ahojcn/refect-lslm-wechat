@@ -47,8 +47,7 @@
   /* advert_avatar */
   .advert_avatar {
     border: 3px solid #eee;
-    width: 100px;
-    height: 100px;
+    width: 20%;
     padding: 0;
     border-radius: 20%;
     animation: advert_nav-m 20s linear infinite;

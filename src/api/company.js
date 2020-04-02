@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '../utils/request';
 
 // 企业发布/修改兼职信息
 export function createPosition(data) {

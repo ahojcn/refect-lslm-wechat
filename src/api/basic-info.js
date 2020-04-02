@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '../utils/request';
 
 // 发送手机验证码
 export function sendVerifyKey(data) {

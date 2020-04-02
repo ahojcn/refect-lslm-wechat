@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '../utils/request';
 
 // 获取平台服务协议
 export function getServiceLicense() {

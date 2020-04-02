@@ -157,6 +157,15 @@
     </div>
     <!-- 兼职内容 -->
 
+    <!-- 发布兼职按钮 只有企业用户才显示 -->
+    <div v-if="Object.keys($store.state.companyInfo).length !== 0"
+         style="position: fixed; bottom: 10%; padding-left: 75%">
+      <van-button type="primary" color="#33CCFF" icon="plus" round>
+        发布
+      </van-button>
+    </div>
+    <!-- 发布兼职按钮 -->
+
     <!-- 分页 -->
     <div class="animated fadeInUpBig" style="padding-top: 20px">
       <van-pagination

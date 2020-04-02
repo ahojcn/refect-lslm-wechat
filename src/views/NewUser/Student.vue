@@ -34,18 +34,9 @@
     <service-license></service-license>
 
     <div style="padding-top: 20px">
-      <van-row gutter="5">
-        <van-col span="4"></van-col>
-        <van-col span="2">
-          <van-button icon="arrow-left" size="large" type="warning" block to="/NewUser/Index"></van-button>
-        </van-col>
-        <van-col span="14">
-          <van-button @click="onSubmit" icon="success" size="large" type="primary" block>
-            提交
-          </van-button>
-        </van-col>
-        <van-col span="4"></van-col>
-      </van-row>
+      <van-button @click="onSubmit" icon="success" type="primary" block>
+        提交
+      </van-button>
     </div>
   </div>
 </template>

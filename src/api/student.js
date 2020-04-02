@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '../utils/request';
 
 // 学生简历信息上传
 export function uploadStudentResume(data) {

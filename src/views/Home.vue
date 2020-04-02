@@ -21,7 +21,7 @@
       <van-cell-group title="我的">
         <!-- 学生 -->
         <div v-if="Object.keys($store.state.studentInfo).length !== 0">
-          <van-cell title="我的简历" icon="edit" value="点击修改" is-link to="/NewUser/Resume"></van-cell>
+          <van-cell title="我的简历" icon="edit" is-link to="/NewUser/Resume"></van-cell>
         </div>
 
         <!-- 企业 -->
@@ -36,7 +36,9 @@
       </van-cell-group>
 
       <van-cell-group title="认证">
-        <van-cell icon="user-circle-o" title="学生认证" is-link></van-cell>
+        <van-cell v-if="Object.keys($store.state.studentInfo).length === 0" icon="user-circle-o" title="学生认证" is-link></van-cell>
+        <van-cell v-if="Object.keys($store.state.companyInfo).length === 0" icon="user-circle-o" title="企业认证" is-link></van-cell>
+        <van-cell v-if="Object.keys($store.state.clubInfo).length === 0" icon="user-circle-o" title="社团认证" is-link to="/NewUser/Club"></van-cell>
       </van-cell-group>
     </div>
   </div>
@@ -82,7 +84,7 @@
   /* advert_avatar */
   .advert_avatar {
     border: 3px solid #eee;
-    border-radius: 50%;
+    border-radius: 20%;
     padding: 0;
     width: 20%;
     animation: advert_nav-m 20s linear infinite;

@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '../utils/request';
 
 // 学生身份信息注册
 export function approveStudent(data) {
